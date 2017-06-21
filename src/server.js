@@ -7,9 +7,9 @@ import * as models from './models'
 import { socket } from './socket'
 import User, { login, register } from './models/User'
 const app = express()
-// const serve = http.Server(app)
-// const io = ioSk(serve)
-
+const serve = http.Server(app)
+const io = ioSk(serve)
+const Port = process.env.PORT || 3001
 
 //Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,8 +41,8 @@ app.get('/login/:user/:pass', (req, res) => {
 app.get('/fb', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/fb.html'))
 })
-// socket(io)
+socket(io)
 
-app.listen(process.env.PORT || 3001, () => {
+serve.listen(Port, () => {
   console.log('started...')
 })
