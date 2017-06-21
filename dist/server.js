@@ -8,10 +8,8 @@ var _socket3 = require('./socket');
 var _User = require('./models/User');var _User2 = _interopRequireDefault(_User);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 var app = (0, _express2.default)();
 var serve = _http2.default.Server(app);
-var io = (0, _socket2.default)(serve);
-serve.listen(process.env.PORT || 3001, function () {
-  console.log('started...');
-}
+var io = (0, _socket2.default)(serve
+
 
 //Set our static file directory to public
 );app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
@@ -44,3 +42,7 @@ app.get('/fb', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/fb.html'));
 });
 (0, _socket3.socket)(io);
+
+serve.listen(process.env.PORT || 3001, function () {
+  console.log('started...');
+});
