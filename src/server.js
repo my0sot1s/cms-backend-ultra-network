@@ -9,7 +9,7 @@ import User, { login, register } from './models/User'
 const app = express()
 const serve = http.Server(app)
 const io = ioSk(serve)
-const Port = process.env.PORT || 3001
+let Port = process.env.PORT || 3001
 
 //Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
