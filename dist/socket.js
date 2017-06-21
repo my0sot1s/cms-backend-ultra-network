@@ -1,4 +1,6 @@
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });
+var rooms = [];
+var userId = [];
 var socket = exports.socket = function socket(io) {
   io.on('connection', function (socket) {
     socket.on('authen', function (data) {

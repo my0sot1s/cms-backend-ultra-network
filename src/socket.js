@@ -1,4 +1,6 @@
 
+let rooms = []
+let userId = []
 export const socket = io => {
   io.on('connection', (socket) => {
     socket.on('authen', data => {
