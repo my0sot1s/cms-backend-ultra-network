@@ -17,11 +17,11 @@ var doc = {
   avatar: 'http://i.imgur.com/Fm78yn7.jpg',
   salt: _mongoose2.default.Types.ObjectId() };
 
-console.log(doc
+console.log(doc);
 // register(doc, d => {
 //   console.log(d)
 // })
-);(0, _User.login)('admin', 'admin', function (err, i, info) {
+(0, _User.login)('admin', 'admin', function (err, i, info) {
   console.log(err, i);
   if (i) {
     console.log(info);

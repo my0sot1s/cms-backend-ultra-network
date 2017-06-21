@@ -47,12 +47,12 @@ var socket = exports.socket = function socket(io) {
       to(data.room_name).
       emit('new_message', data.msg);
     });
-    console.log(io.sockets.server.eio.clientsCount
+    console.log(io.sockets.server.eio.clientsCount);
     // console.log(io.sockets.clients())
-    );console.log(io.sockets.adapter.rooms
+    console.log(io.sockets.adapter.rooms);
     // console.log(io.sockets.server.nsps['/'].connected)
     // console.log(io.sockets.server.sockets.clients)
-    );});
+  });
 };
 
 console.log('...running');
