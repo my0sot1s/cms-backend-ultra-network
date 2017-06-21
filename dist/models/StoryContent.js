@@ -2,14 +2,13 @@
 var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 var Schemas = _mongoose2.default.Schema({
-  dateCreate: { type: Date, default: Date.now() },
-  userId: { type: _mongoose2.default.SchemaTypes.ObjectId },
-  post: { type: String },
-  media: { type: Array } });
+  banner: { type: Array },
+  content: { type: Array },
+  images: { type: Array },
+  postId: { type: _mongoose2.default.SchemaTypes.ObjectId } });
 
 
-var Model = _mongoose2.default.model('Post', Schemas, 'Post');
-
+var Model = _mongoose2.default.model('StoriesContent', Schemas, 'StoriesContent');
 
 
 var find = exports.find = function find(limit, page) {

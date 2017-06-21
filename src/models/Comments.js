@@ -14,4 +14,17 @@ const Schemas = mongoose.Schema({
 })
 
 
-export default mongoose.model('Comments', Schemas, 'Comments')
+const Model = mongoose.model('Comments', Schemas, 'Comments')
+
+
+export const find = (limit, page) => {
+  const query = Model
+    .find({})
+    .sort({ dateCreate: -1 })
+    .skip(limit && page ? limit * page : 0)
+    .limit(limit || 5)
+  return query
+}
+
+
+export default Model

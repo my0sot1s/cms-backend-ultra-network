@@ -1,15 +1,17 @@
 
 import mongoose from 'mongoose'
-
 const Schemas = mongoose.Schema({
+  titles: { type: String },
+  author: { type: String },
+  begin: { type: String },
+  views: { type: Number, default: 0 },
+  liked: { type: Number, default: 0 },
   dateCreate: { type: Date, default: Date.now() },
   userId: { type: mongoose.SchemaTypes.ObjectId },
-  post: { type: String },
-  media: { type: Array }
+  banner: { type: Array }
 })
 
-const Model = mongoose.model('Post', Schemas, 'Post')
-
+const Model = mongoose.model('Stories', Schemas, 'Stories')
 
 
 export const find = (limit, page) => {

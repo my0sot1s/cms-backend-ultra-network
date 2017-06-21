@@ -10,4 +10,19 @@ const Schema = mongoose.Schema({
 });
 
 //Create a model from the chat schema
-export default mongoose.model('Chats', Schema, 'Chats');
+const Model = mongoose.model('Chats', Schema, 'Chats')
+
+
+export const find = (limit, page) => {
+  const query = Model
+    .find({})
+    .sort({ dateCreate: -1 })
+    .skip(limit && page ? limit * page : 0)
+    .limit(limit || 5)
+  return query
+}
+
+
+
+
+export default Model
