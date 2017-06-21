@@ -2,6 +2,7 @@ import express from 'express'
 import http from 'http'
 import ioSk from 'socket.io'
 import mongoose from 'mongoose'
+import path from 'path'
 import * as models from './models'
 
 import User, { login, register } from './models/User'
@@ -11,7 +12,7 @@ const io = ioSk(serve)
 serve.listen(3001)
 
 //Set our static file directory to public
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Allow CORS
 app.all('/*', function (req, res, next) {
@@ -25,7 +26,10 @@ app.all('/*', function (req, res, next) {
   }
 });
 app.get('/', (req, res) => {
-  res.sendfile(__dirname + '/index.html')
+  res.sendfile(path.join(__dirname, 'public/index.html'))
+})
+app.get('/socket', (req, res) => {
+  res.sendfile(path.join(__dirname, 'public/socket.html'))
 })
 app.get('/login/:user/:pass', (req, res) => {
   login(req.params.user, req.params.pass, (err, r, k) => {
@@ -35,7 +39,7 @@ app.get('/login/:user/:pass', (req, res) => {
   })
 })
 app.get('/fb', (req, res) => {
-  res.sendfile(__dirname + '/fb.html')
+  res.sendfile(path.join(__dirname, 'public/fb.html'))
 })
 
 let rooms = []
