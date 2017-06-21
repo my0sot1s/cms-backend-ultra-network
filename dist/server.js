@@ -9,7 +9,9 @@ var _User = require('./models/User');var _User2 = _interopRequireDefault(_User);
 var app = (0, _express2.default)();
 var serve = _http2.default.Server(app);
 var io = (0, _socket2.default)(serve);
-serve.listen(process.env.PORT || 3001
+serve.listen(process.env.PORT || 3001, function () {
+  console.log('started...');
+}
 
 //Set our static file directory to public
 );app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));

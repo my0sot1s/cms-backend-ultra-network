@@ -53,4 +53,4 @@ var socket = exports.socket = function socket(io) {
     );});
 };
 
-console.log('...stated');
+console.log('...running');
