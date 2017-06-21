@@ -4,7 +4,7 @@ import ioSk from 'socket.io'
 import mongoose from 'mongoose'
 import * as models from './models'
 
-
+import User, { login, register } from './models/User'
 const app = express()
 const serve = http.Server(app)
 const io = ioSk(serve)
@@ -27,6 +27,13 @@ app.all('/*', function (req, res, next) {
 app.get('/', (req, res) => {
   res.sendfile(__dirname + '/index.html')
 })
+app.get('/login/:user/:pass', (req, res) => {
+  login(req.params.user, req.params.pass, (err, r, k) => {
+    if (r && !err)
+      res.send(k);
+    else res.send('Login failure');
+  })
+})
 app.get('/fb', (req, res) => {
   res.sendfile(__dirname + '/fb.html')
 })
@@ -35,13 +42,24 @@ let rooms = []
 let usersOnlive = []
 
 io.on('connection', (socket) => {
-  socket.emit('authen', { id: socket.id })
+  socket.on('authen', data => {
+    socket.id = data.userId
+  })
   socket.on('join_room', function (room_name) {
     socket.join(room_name);
     if (rooms.indexOf(room_name) !== -1) {
       rooms.push(room_name)
     }
   });
+  socket.on('login', ({ u, p }) => {
+    login(u, p, (e, b, d) => {
+      if (b && !e) {
+        socket.emit('r_login', { info: d, ok: true })
+      } else {
+        socket.emit('r_login', { infor: null, ok: false })
+      }
+    })
+  })
   socket.on('switch_room', (req) => {
     socket.join(req.new_room)
     console.log(`${socket.id} witch room ${req.old_room} to ${req.new_room}`)

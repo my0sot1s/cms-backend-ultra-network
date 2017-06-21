@@ -14,12 +14,16 @@
 </head>
 
 <body>
+  <input type="text" id='u' /><br>
+  <input type="password" id='p' /><br>
+  <input type="button" value="Login" onclick="login()" />
+  <br/>
   <select id="mySelect">
-  <option value='default'>default</option>
-  <option value='room1'>room1</option>
-  <option value='persional'>personal</option>
-  <option value='vip'>vip</option>
-</select>
+    <option value='default'>default</option>
+    <option value='room1'>room1</option>
+    <option value='persional'>personal</option>
+    <option value='vip'>vip</option>
+  </select>
   <input type="text" id='input' />
   <button onclick="sendNewMessage()">Send</button>
   <button onclick="changeRoom()">change room</button>
@@ -33,9 +37,9 @@
     let userId = ''//session id
     var socket = io.connect();
     let onRoom = 'default'
-    socket.on("authen", ({ id }) => {
-      userId = id
-    });
+    // socket.on("authen", ({ id }) => {
+    //   userId = id
+    // });
 
     let e = document.getElementById("mySelect")
     // onRoom = e.options[e.selectedIndex].value
@@ -45,6 +49,20 @@
     })
     socket.on('join_room_done', data => {
       addNode(data)
+    })
+    function login() {
+      var u = document.getElementById('u').value
+      var p = document.getElementById('p').value
+      socket.emit('login', ({ u, p }))
+    }
+    socket.on('r_login', res => {
+      if (res.ok) {
+        debugger
+        userId = res.infor._id;
+        socket.emit('authen', { userId })
+      } else {
+        debugger
+      }
     })
     function addNode(data) {
       var node = document.createElement('li')

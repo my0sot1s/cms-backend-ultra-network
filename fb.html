@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <p id='t'></p>
   <script>
     // Only works after `FB.init` is called
     function myFacebookLogin() {
@@ -17,24 +18,24 @@
         //1632062990381722 react-vietnam
         //user id=10212702615502372
         FB.api(
-          "/1632062990381722/members?limit=100",
+          "/1632062990381722/feed?limit=100",
           function (response) {
             if (response && !response.error) {
-              /* handle the result */
-              // debugger
+              const a = JSON.stringify(response, null, 2)
+              document.getElementById('t').innerHTML = a;
             }
           }
         );
         //https://stackoverflow.com/questions/27062583/which-fields-are-available-for-the-fields-parameter-in-the-graph-api-search-en
-        FB.api(
-          "/10212702615502372?fields=id,name,gender,link,picture&type=large",
-          function (response) {
-            if (response && !response.error) {
-              debugger
-              /* handle the result */
-            }
-          }
-        );
+        // FB.api(
+        //   "/10212702615502372?fields=id,name,gender,link,picture&type=large",
+        //   function (response) {
+        //     if (response && !response.error) {
+        //       debugger
+        //       /* handle the result */
+        //     }
+        //   }
+        // );
       }, { scope: 'publish_actions' });
     }
   </script>
