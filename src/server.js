@@ -7,7 +7,7 @@ import * as models from './models'
 import { socket } from './socket'
 import User, { login, register } from './models/User'
 const app = express()
-const serve = http.Server(app)
+const serve = http.createServer(app)
 const io = ioSk(serve)
 serve.listen(process.env.PORT || 3001, () => {
   console.log('started...')
