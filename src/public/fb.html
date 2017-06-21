@@ -13,14 +13,16 @@
   <script>
     // Only works after `FB.init` is called
     function myFacebookLogin() {
-      FB.login(function () {
+      FB.login(function (a, b, c) {
+        debugger
         // FB.api('/me/feed', 'post', { message: 'Fb là nơi để nổi buồn đửa ị ra! Nát' })
         //1632062990381722 react-vietnam
         //user id=10212702615502372
         FB.api(
-          "/1632062990381722/feed?limit=100",
+          "/1173636692750000/feed?limit=5",
           function (response) {
             if (response && !response.error) {
+              debugger
               const a = JSON.stringify(response, null, 2)
               document.getElementById('t').innerHTML = a;
             }
