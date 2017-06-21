@@ -53,4 +53,4 @@ export const socket = io => {
   })
 }
 
-console.log('...stated')
+console.log('...running')
