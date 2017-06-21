@@ -20,7 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // help express can read param with ?
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(require('cors')())
 //Allow CORS
 app.all('*', function (req, res, next) {
@@ -61,4 +60,3 @@ serve.listen(PORT, () => {
 })
 
 socket(io)
-

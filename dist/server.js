@@ -20,7 +20,6 @@ app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 // help express can read param with ?
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
-
 app.use(require('cors')());
 //Allow CORS
 app.all('*', function (req, res, next) {
