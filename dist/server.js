@@ -15,16 +15,16 @@ var Port = process.env.PORT || 3001;
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 
 //Allow CORS
-app.all('/*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
-  if (req.method == 'OPTIONS') {
-    res.status(200).end();
-  } else {
-    next();
-  }
-});
+// app.all('/*', function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//   res.header('Access-Control-Allow-Headers', 'Content-type,Accept,X-Access-Token,X-Key');
+//   if (req.method == 'OPTIONS') {
+//     res.status(200).end();
+//   } else {
+//     next();
+//   }
+// });
 app.get('/', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/index.html'));
 });
