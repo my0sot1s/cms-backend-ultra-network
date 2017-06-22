@@ -14,9 +14,10 @@ var Schemas = _mongoose2.default.Schema({
 var Model = _mongoose2.default.model('Stories', Schemas, 'Stories');
 
 
-var find = exports.find = function find(limit, page) {
+var find = exports.find = function find(limit, page, params) {
+  var postId = params ? { _id: _mongoose2.default.Types.ObjectId(params) } : {};
   var query = Model.
-  find({}).
+  find(postId).
   sort({ dateCreate: -1 }).
   skip(limit && page ? limit * page : 0).
   limit(limit || 5);

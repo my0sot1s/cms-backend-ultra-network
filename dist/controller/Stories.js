@@ -10,7 +10,7 @@ var router = _express2.default.Router();
 router.get('/stories', function (req, res) {
   var limit = Number(req.query.limit) || 5;
   var page = Number(req.query.page) || 0;
-  (0, _Stories.find)(limit, page).exec(function (err, data) {
+  (0, _Stories.find)(limit, page, req.query.postId).exec(function (err, data) {
     if (!err && data) {
       res.json(data);
     }

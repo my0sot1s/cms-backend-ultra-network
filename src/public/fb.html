@@ -18,26 +18,27 @@
         // FB.api('/me/feed', 'post', { message: 'Fb là nơi để nổi buồn đửa ị ra! Nát' })
         //1632062990381722 react-vietnam
         //user id=10212702615502372
-        FB.api(
-          "/1173636692750000/feed?limit=5",
-          function (response) {
-            if (response && !response.error) {
-              debugger
-              const a = JSON.stringify(response, null, 2)
-              document.getElementById('t').innerHTML = a;
-            }
-          }
-        );
-        //https://stackoverflow.com/questions/27062583/which-fields-are-available-for-the-fields-parameter-in-the-graph-api-search-en
+        // https://graph.facebook.com//oauth/access_token?client_id=125391211209683&client_secret=8c36675ad46eca0e3f85ae2469a9d82c&grant_type=client_credentials
         // FB.api(
-        //   "/10212702615502372?fields=id,name,gender,link,picture&type=large",
+        //   "/1173636692750000/feed?limit=5",
         //   function (response) {
         //     if (response && !response.error) {
         //       debugger
-        //       /* handle the result */
+        //       const a = JSON.stringify(response, null, 2)
+        //       document.getElementById('t').innerHTML = a;
         //     }
         //   }
         // );
+        //https://stackoverflow.com/questions/27062583/which-fields-are-available-for-the-fields-parameter-in-the-graph-api-search-en
+        FB.api(
+          "/10212702615502372?fields=id,name,gender,link,picture&type=large",
+          function (response) {
+            if (response && !response.error) {
+              debugger
+              /* handle the result */
+            }
+          }
+        );
       }, { scope: 'publish_actions' });
     }
   </script>

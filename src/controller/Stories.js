@@ -10,7 +10,7 @@ const router = express.Router()
 router.get('/stories', (req, res) => {
   let limit = Number(req.query.limit) || 5
   let page = Number(req.query.page) || 0
-  find(limit, page).exec((err, data) => {
+  find(limit, page, req.query.postId).exec((err, data) => {
     if (!err && data) {
       res.json(data)
     }

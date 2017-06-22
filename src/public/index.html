@@ -9,9 +9,12 @@
 </head>
 
 <body>
+  <p id='time'></p>
   <script>
     (function () {
-      document.write(new Date());
+      setInterval(() => {
+        document.getElementById('time').innerHTML = new Date()
+      }, 1000)
     })()
   </script>
 </body>
