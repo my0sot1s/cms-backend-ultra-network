@@ -7,8 +7,8 @@ var _path = require('path');var _path2 = _interopRequireDefault(_path);
 var _models = require('./models');var models = _interopRequireWildcard(_models);
 var _socket3 = require('./socket');
 var _User = require('./models/User');var _User2 = _interopRequireDefault(_User);
-var _controller = require('./controller');var _controller2 = _interopRequireDefault(_controller);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
+var _controller = require('./controller');var _controller2 = _interopRequireDefault(_controller);
+var _Comments = require('./models/Comments');var a = _interopRequireWildcard(_Comments);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 var app = (0, _express2.default)();
 var serve = _http2.default.Server(app);

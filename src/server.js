@@ -8,7 +8,7 @@ import * as models from './models'
 import { socket } from './socket'
 import User, { login, register } from './models/User'
 import list from './controller'
-
+import * as a from './models/Comments'
 
 const app = express()
 const serve = http.Server(app)
