@@ -89,5 +89,8 @@ var login = exports.login = function login(userName, passWord, cb) {
     }
   });
 };
+
+
+
 //Create a model from the chat schema
 exports.default = Model;

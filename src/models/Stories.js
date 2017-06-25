@@ -25,5 +25,28 @@ export const find = (limit, page, params) => {
 }
 
 
+// for create field
+
+export async function save(params) {
+  let result = await new Model(params).save()
+  return result
+}
+
+// find and update
+
+export async function update({ _id, title, author, begin, view, liked, userId, banner }) {
+  return await Model.findByIdAndUpdate({ _id }, {
+    $set: {
+      title,
+      author,
+      begin,
+      view,
+      liked,
+      userId,
+      banner
+    }
+  })
+}
+
 
 export default Model

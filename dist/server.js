@@ -8,7 +8,11 @@ var _models = require('./models');var models = _interopRequireWildcard(_models);
 var _socket3 = require('./socket');
 var _User = require('./models/User');var _User2 = _interopRequireDefault(_User);
 var _controller = require('./controller');var _controller2 = _interopRequireDefault(_controller);
-var _Comments = require('./models/Comments');var a = _interopRequireWildcard(_Comments);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _Comments = require('./models/Comments');var a = _interopRequireWildcard(_Comments);
+var _middleware = require('./middleware');
+var _schema = require('./graphql/schema');var _schema2 = _interopRequireDefault(_schema);
+var _expressGraphql = require('express-graphql');var _expressGraphql2 = _interopRequireDefault(_expressGraphql);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
 
 var app = (0, _express2.default)();
 var serve = _http2.default.Server(app);
@@ -22,18 +26,7 @@ app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use(require('cors')());
 //Allow CORS
-app.all('*', function (req, res, next) {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT,DELETE,OPTIONS');
-  res.set('Access-Control-Expose-Headers', 'Content-Length');
-  res.set('Access-Control-Allow-Credentials', 'true');
-  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-  if (req.method == 'OPTIONS') {
-    res.status(200).end();
-  } else {
-    next();
-  }
-});
+app.all('*', _middleware.headerConfig);
 
 app.get('/', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/index.html'));
@@ -50,6 +43,13 @@ for (var i = 0; i < len; i++) {
 app.get('/socket', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/socket.html'));
 });
+
+app.use('/graphql', (0, _expressGraphql2.default)(function () {return {
+    schema: _schema2.default,
+    graphiql: true,
+    pretty: true };}));
+
+
 
 app.get('/fb', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/fb.html'));

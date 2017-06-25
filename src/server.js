@@ -9,6 +9,10 @@ import { socket } from './socket'
 import User, { login, register } from './models/User'
 import list from './controller'
 import * as a from './models/Comments'
+import { corsOptions, headerConfig } from './middleware'
+import schema from './graphql/schema'
+import graphqlHTTP from 'express-graphql'
+
 
 const app = express()
 const serve = http.Server(app)
@@ -22,18 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(require('cors')())
 //Allow CORS
-app.all('*', function (req, res, next) {
-  res.set('Access-Control-Allow-Origin', '*');
-  res.set('Access-Control-Allow-Methods', 'GET, POST, PUT,DELETE,OPTIONS');
-  res.set('Access-Control-Expose-Headers', 'Content-Length');
-  res.set('Access-Control-Allow-Credentials', 'true');
-  res.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type');
-  if (req.method == 'OPTIONS') {
-    res.status(200).end();
-  } else {
-    next();
-  }
-});
+app.all('*', headerConfig);
 
 app.get('/', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/index.html'))
@@ -50,6 +43,13 @@ for (var i = 0; i < len; i++) {
 app.get('/socket', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/socket.html'))
 })
+
+app.use('/graphql', graphqlHTTP(() => ({
+  schema,
+  graphiql: true,
+  pretty: true
+})
+))
 
 app.get('/fb', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/fb.html'))

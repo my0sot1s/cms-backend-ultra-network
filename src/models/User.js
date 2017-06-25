@@ -89,5 +89,8 @@ export const login = (userName, passWord, cb) => {
     }
   })
 }
+
+
+
 //Create a model from the chat schema
 export default Model
