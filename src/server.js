@@ -44,6 +44,7 @@ app.get('/socket', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/socket.html'))
 })
 
+
 app.use('/graphql', graphqlHTTP(() => ({
   schema,
   graphiql: true,

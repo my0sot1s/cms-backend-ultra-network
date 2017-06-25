@@ -44,6 +44,7 @@ app.get('/socket', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/socket.html'));
 });
 
+
 app.use('/graphql', (0, _expressGraphql2.default)(function () {return {
     schema: _schema2.default,
     graphiql: true,

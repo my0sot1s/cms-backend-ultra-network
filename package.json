@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec babel-node ./src/server.js",
+    "single": "babel src --out-dir dist",
     "build": "babel src --out-dir dist && git add . && git commit -m 'auto commit' && git push",
     "start": "NODE_ENV=production node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
