@@ -10,7 +10,7 @@ var url = 'https://graph.facebook.com/v2.9/';
 async function getInfor(_body) {
   var promises = function promises(id) {
     return new _promise2.default(function (resolve, reject) {
-      var link = '' + url + id + '?fields=id,name,gender,about,birthday,link,picture&type=large&access_token=' + access_token;
+      var link = '' + url + id + '?fields=id,name,gender,about,birthday,link,picture,email&type=large&access_token=' + access_token;
       (0, _request2.default)(link, function (err2, res2, body2) {
         if (!err2 && res2 && res2.statusCode === 200) {
           resolve(JSON.parse(body2, null, 2));

@@ -13,7 +13,7 @@ const mutation = {
     data: {
       name: 'data',
       type: new GraphQLNonNull(StoryContentInputType)
-    }
+    },
   },
   resolve(root, params) {
     var newContent = new Content(params.data)

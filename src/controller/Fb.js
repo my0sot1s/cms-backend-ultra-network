@@ -10,7 +10,7 @@ let url = `https://graph.facebook.com/v2.9/`
 async function getInfor(_body) {
   const promises = (id) => {
     return new Promise((resolve, reject) => {
-      var link = `${url}${id}?fields=id,name,gender,about,birthday,link,picture&type=large&access_token=${access_token}`
+      var link = `${url}${id}?fields=id,name,gender,about,birthday,link,picture,email&type=large&access_token=${access_token}`
       request(link, (err2, res2, body2) => {
         if (!err2 && res2 && res2.statusCode === 200) {
           resolve(JSON.parse(body2, null, 2))

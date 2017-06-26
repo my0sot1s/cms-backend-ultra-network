@@ -12,8 +12,9 @@ import * as a from './models/Comments'
 import { corsOptions, headerConfig } from './middleware'
 import schema from './graphql/schema'
 import graphqlHTTP from 'express-graphql'
-
-
+import { execute, subscribe } from 'graphql';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+// http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
 const app = express()
 const serve = http.Server(app)
 const io = ioSk(serve)
@@ -39,11 +40,6 @@ for (var i = 0; i < len; i++) {
   app.use('/api', list[i])
 }
 
-// idiot
-app.get('/socket', (req, res) => {
-  res.sendfile(path.join(__dirname, 'public/socket.html'))
-})
-
 
 app.use('/graphql', graphqlHTTP(() => ({
   schema,
@@ -52,12 +48,19 @@ app.use('/graphql', graphqlHTTP(() => ({
 })
 ))
 
-app.get('/fb', (req, res) => {
-  res.sendfile(path.join(__dirname, 'public/fb.html'))
-})
-
+// app.get('/fb', (req, res) => {
+//   res.sendfile(path.join(__dirname, 'public/fb.html'))
+// })
+// idiot
+// app.get('/socket', (req, res) => {
+//   res.sendfile(path.join(__dirname, 'public/socket.html'))
+// })
 serve.listen(PORT, () => {
   console.log('started...')
 })
+
+// const subscriptions = new SubscriptionServer({
+//   execute,
+// })
 
 socket(io)

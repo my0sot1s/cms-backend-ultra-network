@@ -11,9 +11,10 @@ var _controller = require('./controller');var _controller2 = _interopRequireDefa
 var _Comments = require('./models/Comments');var a = _interopRequireWildcard(_Comments);
 var _middleware = require('./middleware');
 var _schema = require('./graphql/schema');var _schema2 = _interopRequireDefault(_schema);
-var _expressGraphql = require('express-graphql');var _expressGraphql2 = _interopRequireDefault(_expressGraphql);function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-
+var _expressGraphql = require('express-graphql');var _expressGraphql2 = _interopRequireDefault(_expressGraphql);
+var _graphql = require('graphql');
+var _subscriptionsTransportWs = require('subscriptions-transport-ws');function _interopRequireWildcard(obj) {if (obj && obj.__esModule) {return obj;} else {var newObj = {};if (obj != null) {for (var key in obj) {if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key];}}newObj.default = obj;return newObj;}}function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+// http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
 var app = (0, _express2.default)();
 var serve = _http2.default.Server(app);
 var io = (0, _socket2.default)(serve);
@@ -39,11 +40,6 @@ for (var i = 0; i < len; i++) {
   app.use('/api', _controller2.default[i]);
 }
 
-// idiot
-app.get('/socket', function (req, res) {
-  res.sendfile(_path2.default.join(__dirname, 'public/socket.html'));
-});
-
 
 app.use('/graphql', (0, _expressGraphql2.default)(function () {return {
     schema: _schema2.default,
@@ -52,12 +48,19 @@ app.use('/graphql', (0, _expressGraphql2.default)(function () {return {
 
 
 
-app.get('/fb', function (req, res) {
-  res.sendfile(_path2.default.join(__dirname, 'public/fb.html'));
-});
-
+// app.get('/fb', (req, res) => {
+//   res.sendfile(path.join(__dirname, 'public/fb.html'))
+// })
+// idiot
+// app.get('/socket', (req, res) => {
+//   res.sendfile(path.join(__dirname, 'public/socket.html'))
+// })
 serve.listen(PORT, function () {
   console.log('started...');
 });
+
+// const subscriptions = new SubscriptionServer({
+//   execute,
+// })
 
 (0, _socket3.socket)(io);
