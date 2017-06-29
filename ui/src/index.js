@@ -11,14 +11,14 @@ import logger from 'redux-logger'
 
 // create for graphql normal
 const networkInterface = createNetworkInterface({
-  // uri: 'http://baseserver.herokuapp.com/graphql',
-  uri: 'http://localhost:3001/graphql'
+  uri: 'https://baseserver.herokuapp.com/graphql',
+  // uri: 'http://localhost:3001/graphql'
 })
 
 // for realtime
 const wsClient = new SubscriptionClient(
-  // `ws://baseserver.herokuapp.com/graphql`,
-  `ws://localhost:3001/subscriptions`,
+  `ws://baseserver.herokuapp.com/subscriptions`,
+  // `ws://localhost:3001/subscriptions`,
   {
     reconnect: true
   })
