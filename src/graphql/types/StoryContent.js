@@ -11,7 +11,7 @@ import {
 export const StoryContentType = new GraphQLObjectType({
   name: 'StoryContentType',
   description: 'StoryContent Type',
-  fields: {
+  fields: () => ({
     _id: {
       type: new GraphQLNonNull(GraphQLID),
     },
@@ -21,17 +21,17 @@ export const StoryContentType = new GraphQLObjectType({
     postId: {
       type: GraphQLID
     }
-  }
+  })
 })
 export const StoryContentInputType = new GraphQLInputObjectType({
   name: 'StoryContentInputType',
   description: 'Create new StoyContent',
-  fields: {
+  fields: () => ({
     banner: { type: new GraphQLList(GraphQLString) },
     content: { type: new GraphQLList(GraphQLString) },
     images: { type: new GraphQLList(GraphQLString) },
     postId: {
       type: GraphQLID
     }
-  }
+  })
 })

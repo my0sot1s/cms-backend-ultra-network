@@ -1,28 +1,29 @@
 import React, { Component } from 'react'
+import Foods from '../containers/Foods'
+
 export default [
   {
     path: '/',
     exact: true,
-    sidebar: () => <div>home!</div>,
     main: () => <h2>Home</h2>
   },
   {
     path: '/bubblegum',
-    sidebar: () => <div>bubblegum!</div>,
     main: () => <h2>Bubblegum</h2>
   },
   {
     path: '/shoelaces',
-    sidebar: () => <div>shoelaces!</div>,
     main: () => <h2>Shoelaces</h2>
   },
   {
     path: '/persons/:id',
-    sidebar: () => <div>persion!</div>,
     main: () => <Person />
   },
   {
-    sidebar: () => <div>No match!</div>,
+    path: '/foods',
+    main: () => <Foods />
+  },
+  {
     main: () => <h2>No match</h2>
   }
 ]

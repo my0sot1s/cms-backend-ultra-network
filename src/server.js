@@ -1,24 +1,55 @@
 import express from 'express'
-import http from 'http'
+import http, { createServer } from 'http'
 import bodyParser from 'body-parser'
 import ioSk from 'socket.io'
 import mongoose from 'mongoose'
 import path from 'path'
 import * as models from './models'
-import { socket } from './socket'
+// import { socket } from './socket'
 import User, { login, register } from './models/User'
 import list from './controller'
-import * as a from './models/Comments'
-import { corsOptions, headerConfig } from './middleware'
+import { corsOptions, headerConfig, setPubsubMiddleware } from './middleware'
 import schema from './graphql/schema'
+import { pubsub } from './graphql/subscriptions'
 import graphqlHTTP from 'express-graphql'
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
+console.log(`Running...`)
 const app = express()
-const serve = http.Server(app)
-const io = ioSk(serve)
+// const serve = http.Server(app)
+// const io = ioSk(serve)
 let PORT = process.env.PORT || 3001
+// let WS_PORT = process.env.PORT || 3002
+
+//  ex https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
+
+
+// create server ws for graphql suubscrition
+
+const wsServe = createServer(app)
+
+
+// subcription config for server
+
+// const subscriptionServe = new SubscriptionServer({
+//   subscriptionManager,
+//   onConnect: async (connectParams) => {
+//     console.log(`ws connect established ${connectParams}`)
+//   },
+// },
+//   {
+//     server: wsServe,
+//     path: '/'
+//   })
+
+
+// ws listen path
+
+// wsServe.listen(WS_PORT, () => {
+//   console.log(`WS's listening at ${WS_PORT}`)
+// })
 
 //Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,6 +60,7 @@ app.use(require('cors')())
 //Allow CORS
 app.all('*', headerConfig);
 
+app.use(setPubsubMiddleware(pubsub))
 app.get('/', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/index.html'))
 })
@@ -39,14 +71,40 @@ const len = list.length;
 for (var i = 0; i < len; i++) {
   app.use('/api', list[i])
 }
-
-
-app.use('/graphql', graphqlHTTP(() => ({
+app.use('/graphql', bodyParser.json(), graphqlHTTP(() => ({
   schema,
   graphiql: true,
   pretty: true
 })
 ))
+// new SubscriptionServer({
+//   subscriptionManager,
+//   onSubscribe: (msg, params) => {
+//     debugger
+//     return Object.assign({}, params, {});
+//   }
+// }, {
+//     server: wsServe,
+//     path: '/subscriptions'
+//   })
+
+SubscriptionServer.create(
+  {
+    schema,
+    execute,
+    subscribe,
+  },
+  {
+    server: wsServe,
+    path: '/subscriptions'
+  },
+);
+
+app.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql',
+  subscriptionEnpoint: `ws://localhost:3001/subscriptions`
+}))
+
 
 // app.get('/fb', (req, res) => {
 //   res.sendfile(path.join(__dirname, 'public/fb.html'))
@@ -55,12 +113,8 @@ app.use('/graphql', graphqlHTTP(() => ({
 // app.get('/socket', (req, res) => {
 //   res.sendfile(path.join(__dirname, 'public/socket.html'))
 // })
-serve.listen(PORT, () => {
-  console.log('started...')
+wsServe.listen(PORT, () => {
+  console.log(`*** started at ${PORT} ***`)
 })
 
-// const subscriptions = new SubscriptionServer({
-//   execute,
-// })
-
-socket(io)
+// socket(io)

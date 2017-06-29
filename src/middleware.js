@@ -10,7 +10,7 @@ export function headerConfig(req, res, next) {
     next();
   }
 }
-var whitelist = ['baseserver.herokuapp.com', 'localhost:3001']
+var whitelist = ['baseserver.herokuapp.com', 'localhost:3001', 'localhost:3002']
 export var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -19,4 +19,9 @@ export var corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   }
+}
+
+export const setPubsubMiddleware = pubsub => (req, res, next) => {
+  req.pubsub = pubsub
+  next()
 }

@@ -10,7 +10,7 @@ import {
 export const FoodsType = new GraphQLObjectType({
   name: 'Foods',
   description: 'Foods Type',
-  fields: {
+  fields: () => ({
     _id: {
       type: new GraphQLNonNull(GraphQLID),
     },
@@ -26,12 +26,12 @@ export const FoodsType = new GraphQLObjectType({
     fomular: {
       type: GraphQLString
     }
-  }
+  })
 })
 export const FoodsInputType = new GraphQLInputObjectType({
   name: 'FoodsInput',
   description: 'Create New Food',
-  fields: {
+  fields: () => ({
     link: {
       type: GraphQLString,
     },
@@ -44,5 +44,5 @@ export const FoodsInputType = new GraphQLInputObjectType({
     fomular: {
       type: GraphQLString
     }
-  }
+  })
 })
