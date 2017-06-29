@@ -54,5 +54,3 @@ var socket = exports.socket = function socket(io) {
     // console.log(io.sockets.server.sockets.clients)
   });
 };
-
-console.log('...running');

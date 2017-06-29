@@ -1,3 +1,4 @@
-"use strict";var _mongoose = require("mongoose");var _mongoose2 = _interopRequireDefault(_mongoose);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+'use strict';var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+_mongoose2.default.Promise = require('bluebird');
 //Connect to mongo DB database
-_mongoose2.default.connect("mongodb://dev:1223@ds159328.mlab.com:59328/dbnode");
+_mongoose2.default.connect("mongodb://dev:1223@ds159328.mlab.com:59328/dbnode", { useMongoClient: true });

@@ -4,15 +4,20 @@ var _Foods3 = require('../../types/Foods');function _interopRequireDefault(obj) 
 
 // sub event
 
-var subscriptionEvent = exports.subscriptionEvent = function subscriptionEvent(ontions, args) {return {
-    onSave: function onSave(food) {
-      return food._id = args._id;
+var subscriptionEvent = exports.subscriptionEvent = function subscriptionEvent(ontions) {return {
+    onSaveFood: function onSaveFood(food) {
+      console.log({ food: food });
+      return food;
     } };};
 
 
 
 var subscription = exports.subscription = {
   type: _Foods3.FoodsType,
-  resolve: function resolve(item) {
-    return item;
+  // resolve: item => item,
+  start: function start(a, b, c) {
+    debugger;
+  },
+  stop: function stop() {
+    debugger;
   } };

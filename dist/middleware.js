@@ -10,7 +10,7 @@
     next();
   }
 }
-var whitelist = ['baseserver.herokuapp.com', 'localhost:3001'];
+var whitelist = ['baseserver.herokuapp.com', 'localhost:3001', 'localhost:3002'];
 var corsOptions = exports.corsOptions = {
   origin: function origin(_origin, callback) {
     if (whitelist.indexOf(_origin) !== -1) {
@@ -19,3 +19,9 @@ var corsOptions = exports.corsOptions = {
       callback(new Error('Not allowed by CORS'));
     }
   } };
+
+
+var setPubsubMiddleware = exports.setPubsubMiddleware = function setPubsubMiddleware(pubsub) {return function (req, res, next) {
+    req.pubsub = pubsub;
+    next();
+  };};
