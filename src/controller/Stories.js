@@ -14,6 +14,8 @@ router.get('/stories', (req, res) => {
     if (!err && data) {
       res.json(data)
     }
+    else
+      res.send(err)
   })
 })
 

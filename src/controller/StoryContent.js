@@ -10,7 +10,8 @@ router.get('/storycontent', (req, res) => {
   find(limit, page, req.query.postId).exec((err, data) => {
     if (!err && data) {
       res.json(data)
-    }
+    } else
+      res.send(err)
   })
 })
 

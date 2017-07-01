@@ -13,7 +13,8 @@ router.get('/center', function (req, res) {
   (0, _Center.find)(limit, page, req.query.postId).exec(function (err, data) {
     if (!err && data) {
       res.json(data);
-    }
+    } else
+    res.send(err);
   });
 });exports.default =
 

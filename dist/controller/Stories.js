@@ -13,7 +13,9 @@ router.get('/stories', function (req, res) {
   (0, _Stories.find)(limit, page, req.query.postId).exec(function (err, data) {
     if (!err && data) {
       res.json(data);
-    }
+    } else
+
+    res.send(err);
   });
 });exports.default =
 

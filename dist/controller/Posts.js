@@ -15,9 +15,11 @@ router.get('/post/:postId?', function (req, res) {
       (0, _Comments.find)(limit, page, data[0]._id).exec(function (err2, data2) {
         if (!err2 && data2) {
           res.json({ post: data[0], comments: data2 });
-        }
+        } else
+        res.send(err2);
       });
-    }
+    } else
+    res.send(err);
   });
 });exports.default =
 

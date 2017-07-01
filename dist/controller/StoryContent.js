@@ -10,7 +10,8 @@ router.get('/storycontent', function (req, res) {
   (0, _StoryContent.find)(limit, page, req.query.postId).exec(function (err, data) {
     if (!err && data) {
       res.json(data);
-    }
+    } else
+    res.send(err);
   });
 });exports.default =
 

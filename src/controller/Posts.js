@@ -15,9 +15,11 @@ router.get('/post/:postId?', (req, res) => {
       findComments(limit, page, data[0]._id).exec((err2, data2) => {
         if (!err2 && data2) {
           res.json({ post: data[0], comments: data2 })
-        }
+        } else
+          res.send(err2)
       })
-    }
+    } else
+      res.send(err)
   })
 })
 
