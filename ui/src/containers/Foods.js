@@ -29,7 +29,7 @@ const FoodsQuery = gql`query{
 }
 `;
 
-const FOODS_SUBSCRIPTION = `subscription {
+const FOODS_SUBSCRIPTION = gql`subscription {
   onSaveFood {
     link
     title
