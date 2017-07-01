@@ -1,5 +1,5 @@
 @import '~antd/dist/antd.css';
-html,body,#root {
+html,body,#root ,#base{
   margin: 0;
   padding: 0;
   height: 100%;

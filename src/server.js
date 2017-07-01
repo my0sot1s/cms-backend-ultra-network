@@ -1,7 +1,7 @@
 import express from 'express'
 import http, { createServer } from 'http'
 import bodyParser from 'body-parser'
-import ioSk from 'socket.io'
+// import ioSk from 'socket.io'
 import mongoose from 'mongoose'
 import path from 'path'
 import * as models from './models'
@@ -11,11 +11,13 @@ import list from './controller'
 import { corsOptions, headerConfig, setPubsubMiddleware } from './middleware'
 import schema from './graphql/schema'
 import { pubsub } from './graphql/subscriptions'
-import graphqlHTTP from 'express-graphql'
+// import graphqlHTTP from 'express-graphql'
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
+// import schema2 from './_graphql/schema'
+
 console.log(`Running...`)
 const app = express()
 // const serve = http.Server(app)
@@ -44,13 +46,6 @@ const wsServe = createServer(app)
 //     path: '/'
 //   })
 
-
-// ws listen path
-
-// wsServe.listen(WS_PORT, () => {
-//   console.log(`WS's listening at ${WS_PORT}`)
-// })
-
 //Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
 // help express can read param with ?
@@ -60,7 +55,6 @@ app.use(require('cors')())
 //Allow CORS
 app.all('*', headerConfig);
 
-app.use(setPubsubMiddleware(pubsub))
 app.get('/', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/index.html'))
 })
@@ -71,38 +65,31 @@ const len = list.length;
 for (var i = 0; i < len; i++) {
   app.use('/api', list[i])
 }
-app.use('/graphql', bodyParser.json(), graphqlHTTP(() => ({
-  schema,
-  graphiql: true,
-  pretty: true
-})
-))
-// new SubscriptionServer({
-//   subscriptionManager,
-//   onSubscribe: (msg, params) => {
-//     debugger
-//     return Object.assign({}, params, {});
-//   }
-// }, {
+// app.use('/graphql', bodyParser.json(), graphqlHTTP(() => ({
+//   schema,
+//   graphiql: true,
+//   pretty: true
+// })
+// ))
+
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+
+// SubscriptionServer.create(
+//   {
+//     schema,
+//     execute,
+//     subscribe,
+//   },
+//   {
 //     server: wsServe,
 //     path: '/subscriptions'
-//   })
-
-SubscriptionServer.create(
-  {
-    schema,
-    execute,
-    subscribe,
-  },
-  {
-    server: wsServe,
-    path: '/subscriptions'
-  },
-);
+//   },
+// );
 
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
-  subscriptionEnpoint: `ws://localhost:3001/subscriptions`
+  // subscriptionEnpoint: `ws://localhost:3001/subscriptions`
+  subscriptionEnpoint: `ws://https://baseserver.herokuapp.com/subscriptions`
 }))
 
 
@@ -115,6 +102,15 @@ app.use('/graphiql', graphiqlExpress({
 // })
 wsServe.listen(PORT, () => {
   console.log(`*** started at ${PORT} ***`)
+  new SubscriptionServer({
+    execute,
+    subscribe,
+    schema,
+  }, {
+      server: wsServe,
+      path: '/subscriptions',
+    });
+  console.log(`___________________________`)
 })
 
 // socket(io)

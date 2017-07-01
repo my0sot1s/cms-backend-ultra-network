@@ -4,17 +4,26 @@ import subscription from './subscriptions'
 import queries from './queries'
 // import { subscriptions } from './subscriptions'
 
+const genky = new graphql.GraphQLObjectType({
+  name: 'Subscription',
+  fields: () => subscription
+})
+// console.log(genky)
+
+// export const resolvers = {
+//   Subscription: {
+//     ...subscription
+//   },
+// }
+
 export default new graphql.GraphQLSchema({
   query: new graphql.GraphQLObjectType({
     name: 'Query',
-    fields: queries
+    fields: () => queries
   }),
   mutation: new graphql.GraphQLObjectType({
     name: 'Mutation',
-    fields: mutations
+    fields: () => mutations
   }),
-  subscription: new graphql.GraphQLObjectType({
-    name: 'Subscription',
-    fields: subscription
-  })
+  subscription: genky
 })

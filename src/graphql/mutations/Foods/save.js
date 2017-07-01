@@ -6,7 +6,9 @@ import {
 // import { createTypeWithPagination } from 'graphql/utils'
 import { FoodsType, FoodsInputType } from '../../types/Foods'
 import Foods from '../../../models/Foods'
-// import { pubsub } from '../../subscriptions'
+// import { pubsub } from '../../schema'
+import { publishEvent } from '../../subscriptions'
+
 const mutation = {
   type: FoodsType,
   args: {
@@ -15,16 +17,14 @@ const mutation = {
       type: new GraphQLNonNull(FoodsInputType)
     }
   },
-  resolve: async (root, params, { pubsub }) => {
+  resolve: async (root, params) => {
     var newFood = new Foods(params.data)
-    var doc = newFood.save()
+    var doc = await newFood.save()
     if (!doc) {
       return new Error('...Can\'n insert')
     }
     else {
-      if (pubsub) {
-        pubsub.publish('onSaveFood', doc);
-      }
+      publishEvent('onSaveFood', doc)
       return doc
     }
   }

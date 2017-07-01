@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { client } from '../../'
+import client from '../../helpers/apollo'
 
 export default combineReducers({
   // todos: todoReducer,

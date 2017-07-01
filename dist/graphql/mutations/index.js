@@ -3,7 +3,3 @@
 require('./Foods').default,
 require('./Stories').default,
 require('./StoryContent').default);
-
-
-var subscription = exports.subscription = require('./Foods/subs').subscription;
-var subscriptionEvent = exports.subscriptionEvent = require('./Foods/subs').subscriptionEvent;
