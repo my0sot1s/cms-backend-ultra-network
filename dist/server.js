@@ -29,7 +29,7 @@ app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 // help express can read param with ?
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
-app.use(require('cors')(_middleware.middleware.cors));
+app.use(require('cors')());
 //Allow CORS
 app.all('*', _middleware.middleware.header);
 
@@ -52,9 +52,9 @@ app.use.apply(app, ['/graphql'].concat(_toConsumableArray(_middleware.middleware
 app.use('/graphiql', (0, _graphqlServerExpress.graphiqlExpress)({
   endpointURL: '/graphql',
   subscriptionEnpoint:
-  // process.env.NODE_ENV === 'development'
-  //   ? `ws://localhost:3001/subscriptions`
-  'ws://https://baseserver.herokuapp.com/subscriptions' }));
+  process.env.NODE_ENV === 'development' ? 'ws://localhost:3001/subscriptions' : 'ws://https://baseserver.herokuapp.com/subscriptions' }));
+
+
 
 wsServe.listen(PORT, function () {
   console.log('*** started at ' + PORT + ' ***');

@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // help express can read param with ?
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(require('cors')(middleware.cors))
+app.use(require('cors')())
 //Allow CORS
 app.all('*', middleware.header);
 
@@ -52,9 +52,9 @@ app.use('/graphql', ...middleware.graphql, graphqlExpress({ schema }));
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
   subscriptionEnpoint:
-  // process.env.NODE_ENV === 'development'
-  //   ? `ws://localhost:3001/subscriptions`
-  `ws://https://baseserver.herokuapp.com/subscriptions`
+  process.env.NODE_ENV === 'development'
+    ? `ws://localhost:3001/subscriptions` :
+    `ws://https://baseserver.herokuapp.com/subscriptions`
 }))
 wsServe.listen(PORT, () => {
   console.log(`*** started at ${PORT} ***`)
