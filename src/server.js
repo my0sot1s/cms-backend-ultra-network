@@ -51,8 +51,9 @@ app.use('/graphql', ...middleware.graphql, graphqlExpress({ schema }));
 
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
-  subscriptionEnpoint: `ws://localhost:3001/subscriptions`
-  // subscriptionEnpoint: `ws://https://baseserver.herokuapp.com/subscriptions`
+  subscriptionEnpoint: process.env.NODE_ENV === 'development'
+    ? `ws://localhost:3001/subscriptions`
+    : `ws://https://baseserver.herokuapp.com/subscriptions`
 }))
 wsServe.listen(PORT, () => {
   console.log(`*** started at ${PORT} ***`)
