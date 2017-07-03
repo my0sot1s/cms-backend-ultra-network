@@ -1,5 +1,6 @@
 'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.removeFood = exports.editFood = exports.addFood = undefined;var _extends = Object.assign || function (target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i];for (var key in source) {if (Object.prototype.hasOwnProperty.call(source, key)) {target[key] = source[key];}}}return target;};var _Foods = require('../../../../models/Foods');var _Foods2 = _interopRequireDefault(_Foods);
 var _subscriptions = require('../../subscriptions');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
 // Note : insert food to mongo
 var addFood = exports.addFood = async function addFood(root, _ref) {var input = _ref.input;
   var newFood = new _Foods2.default(input);
@@ -8,7 +9,7 @@ var addFood = exports.addFood = async function addFood(root, _ref) {var input = 
     return new Error('...Can\'n insert');
   } else
   {
-    _subscriptions.pubsub.publish('onSaveFood', doc);
+    (0, _subscriptions.publishEvent)('onSaveFood', doc);
     return doc;
   }
 };

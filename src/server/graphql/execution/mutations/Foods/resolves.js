@@ -1,5 +1,6 @@
 import Foods from '../../../../models/Foods'
-import { pubsub } from '../../subscriptions'
+import { pubsub, publishEvent } from '../../subscriptions'
+
 // Note : insert food to mongo
 export const addFood = async (root, { input }) => {
   var newFood = new Foods(input)
@@ -8,7 +9,7 @@ export const addFood = async (root, { input }) => {
     return new Error('...Can\'n insert')
   }
   else {
-    pubsub.publish('onSaveFood', doc)
+    publishEvent('onSaveFood', doc)
     return doc
   }
 }

@@ -12,7 +12,7 @@
   // Note : implement subscriptions
   // Thực thi subscription
   Subscription: _extends({},
-  require('./mutations/Foods/resolves').default) };
+  require('./subscriptions').default) };
 
 
 

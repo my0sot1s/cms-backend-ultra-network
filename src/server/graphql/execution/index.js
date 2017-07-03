@@ -12,7 +12,7 @@ export default {
   // Note : implement subscriptions
   // Thực thi subscription
   Subscription: {
-    ...require('./mutations/Foods/resolves').default
+    ...require('./subscriptions').default
   }
 }
 

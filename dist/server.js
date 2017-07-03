@@ -64,7 +64,7 @@ _index.middleware.graphql), [
 app.use('/graphiql', (0, _graphqlServerExpress.graphiqlExpress)({
   endpointURL: '/graphql',
   subscriptionsEndpoint:
-  process.env.NODE_ENV === 'development' ? 'ws://localhost:3001/subscriptions' : 'ws://baseserver.herokuapp.com/subscriptions' }));
+  process.env.NODE_ENV === 'development' ? 'ws://localhost:3001/subscriptions' : 'wss://baseserver.herokuapp.com/subscriptions' }));
 
 
 

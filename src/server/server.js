@@ -68,7 +68,7 @@ app.use('/graphiql', graphiqlExpress({
     ?
     `ws://localhost:3001/subscriptions`
     :
-    `ws://baseserver.herokuapp.com/subscriptions`
+    `wss://baseserver.herokuapp.com/subscriptions`
 }))
 
 const wsServe = createServer(app)

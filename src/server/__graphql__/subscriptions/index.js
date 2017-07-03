@@ -5,7 +5,6 @@ import { FoodsType } from '../types/Foods'
 export const pubsub = new PubSub();
 
 export const publishEvent = (event, doc) => {
-  debugger
   pubsub.publish(event, doc)
 }
 export default {
