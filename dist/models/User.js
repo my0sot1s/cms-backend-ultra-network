@@ -1,4 +1,4 @@
-'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.login = exports.register = undefined;var _this = undefined;var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
+'use strict';Object.defineProperty(exports, "__esModule", { value: true });exports.login = exports.register = undefined;var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
 var _crypto = require('crypto');var _crypto2 = _interopRequireDefault(_crypto);
 var _promise = require('promise');var _promise2 = _interopRequireDefault(_promise);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
@@ -18,12 +18,12 @@ var Schema = _mongoose2.default.Schema({
 
 Schema.virtual('fullName').
 get(function () {
-  return _this.firstName.concat(' ', _this.lastName);
+  return undefined.firstName.concat(' ', undefined.lastName);
 }).
 set(function (name) {
   var split = name.split('*');
-  _this.lastName = split[1];
-  _this.firstName = split[0];
+  undefined.lastName = split[1];
+  undefined.firstName = split[0];
 });
 
 var Model = _mongoose2.default.model('User', Schema, 'User');

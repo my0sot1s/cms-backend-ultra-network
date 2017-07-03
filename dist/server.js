@@ -1,5 +1,4 @@
-'use strict';var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
-var _express = require('express');var _express2 = _interopRequireDefault(_express);
+'use strict';var _express = require('express');var _express2 = _interopRequireDefault(_express);
 var _http = require('http');var _http2 = _interopRequireDefault(_http);
 var _bodyParser = require('body-parser');var _bodyParser2 = _interopRequireDefault(_bodyParser);
 var _cors = require('cors');var _cors2 = _interopRequireDefault(_cors);
@@ -12,7 +11,7 @@ var _index = require('./middleware/index');
 var _schema = require('./graphql/schema');var _schema2 = _interopRequireDefault(_schema);
 var _graphql = require('graphql');
 var _subscriptionsTransportWs = require('subscriptions-transport-ws');
-var _graphqlServerExpress = require('graphql-server-express');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}require("babel-polyfill");
+var _graphqlServerExpress = require('graphql-server-express');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
 var PORT = process.env.PORT || 3001;
 process.env.NODE_ENV = PORT === 3001 ? 'development' : "production";
@@ -45,7 +44,7 @@ for (var i = 0; i < len; i++) {
 // Note: deploy map graphql to express
 // connect to !/graphiql in dev mode
 app.use.apply(app, [
-'/graphql'].concat((0, _toConsumableArray3.default)(
+'/graphql'].concat(_toConsumableArray(
 _index.middleware.graphql), [
 (0, _graphqlServerExpress.graphqlExpress)(function (req) {
   // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257

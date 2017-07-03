@@ -1,16 +1,16 @@
 {
-  "passPerPreset": true,
   "presets": [
-    "es2015",
-    "stage-0"
+    "es2015"
   ],
   "plugins": [
     "transform-object-rest-spread",
     [
       "transform-runtime",
       {
+        "helpers": false,
         "polyfill": false,
-        "regenerator": true
+        "regenerator": true,
+        "moduleName": "babel-runtime"
       }
     ]
   ],
