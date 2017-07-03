@@ -3,7 +3,7 @@ mongoose.Promise = require('bluebird')
 //Connect to mongo DB database
 const connectModel = async () => {
   return await mongoose.connect("mongodb://dev:1223@ds159328.mlab.com:59328/dbnode?admin?replicaSet=ds159328",
-    // { useMongoClient: true }
+    { useMongoClient: true }
   )
 }
 connectModel()

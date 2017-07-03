@@ -1,29 +1,10 @@
-import * as graphql from 'graphql'
-import mutations from './mutations'
-import subscription from './subscriptions'
-import queries from './queries'
-// import { subscriptions } from './subscriptions'
-
-const genky = new graphql.GraphQLObjectType({
-  name: 'Subscription',
-  fields: () => subscription
-})
-// console.log(genky)
-
-// export const resolvers = {
-//   Subscription: {
-//     ...subscription
-//   },
-// }
-
-export default new graphql.GraphQLSchema({
-  query: new graphql.GraphQLObjectType({
-    name: 'Query',
-    fields: () => queries
-  }),
-  mutation: new graphql.GraphQLObjectType({
-    name: 'Mutation',
-    fields: () => mutations
-  }),
-  subscription: genky
-})
+import { makeExecutableSchema } from 'graphql-tools';
+import resolvers, { typeDefs } from './execution'
+// console.log(typeDefs)
+// Note: generate schema from typeDef and resolver
+// tạo schemas
+export default makeExecutableSchema({
+  typeDefs,
+  resolvers,
+  logger: { log: (e) => console.log(e) }
+});

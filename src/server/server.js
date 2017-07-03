@@ -9,16 +9,15 @@ import './models'
 import controller from './controller'
 import { middleware } from './middleware/index'
 import schema from './graphql/schema'
-import { pubsub } from './graphql/subscriptions'
 import { execute, subscribe } from 'graphql';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
-
-console.log(`Running...`)
-const app = express()
 let PORT = process.env.PORT || 3001
-const wsServe = createServer(app)
+process.env.NODE_ENV = PORT === 3001 ? 'development' : "production"
+console.log(`Running...${process.env.NODE_ENV}`)
+const app = express()
+
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
 // create server ws for graphql suubscrition
 // Set our static file directory to public
@@ -44,30 +43,53 @@ for (var i = 0; i < len; i++) {
 
 // Note: deploy map graphql to express
 // connect to !/graphiql in dev mode
-app.use('/graphql', ...middleware.graphql, graphqlExpress({ schema }));
+app.use(
+  '/graphql',
+  ...middleware.graphql,
+  graphqlExpress(req => {
+    // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257
+    const query = req.query.query || req.body.query;
+    if (query && query.length > 2000) {
+      // None of our app's queries are this long
+      // Probably indicates someone trying to send an overly expensive query
+      throw new Error('Query too large.');
+    }
+    return {
+      schema
+    };
+  })
+);
+// app.use('/graphql', ...middleware.graphql, graphqlExpress({ schema: _schema }));
+// app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
-  subscriptionEnpoint:
+  subscriptionsEndpoint:
   process.env.NODE_ENV === 'development'
-    ? `ws://localhost:3001/subscriptions` :
+    ?
+    `ws://localhost:3001/subscriptions`
+    :
     `ws://baseserver.herokuapp.com/subscriptions`
 }))
 
-// Note: Deploy subscription server
-// work with websocket at: ws://localhost:3001/subscriptions of course work with dev model
-// subscripts to recieve broadcast
-SubscriptionServer.create({
-  execute,
-  subscribe,
-  schema,
-}, {
-    server: wsServe,
-    path: '/subscriptions',
-  });
+const wsServe = createServer(app)
+
 
 // Note: server using port 3001 in development
 // work with socket
 wsServe.listen(PORT, () => {
   console.log(`*** started at ${PORT} ***`)
   console.log(`+*******************************+`)
+  // Note: Deploy subscription server
+  // work with websocket at: ws://localhost:3001/subscriptions of course work with dev model
+  // subscripts to recieve broadcast
+  new SubscriptionServer({
+    execute,
+    subscribe,
+    schema,
+  }, {
+      server: wsServe,
+      path: '/subscriptions',
+    });
 })
+
+
