@@ -1,3 +1,4 @@
+require("babel-polyfill");
 import express from 'express'
 import http, { createServer } from 'http'
 import bodyParser from 'body-parser'
