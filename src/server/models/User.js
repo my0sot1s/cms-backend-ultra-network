@@ -9,6 +9,7 @@ const Schema = mongoose.Schema({
   passWord: { type: String, default: '' },
   firstName: { type: String },
   lastName: { type: String },
+  displayName: { type: String, default: 'Unknowed!!' },
   email: { type: String },
   borned: { type: String },
   gender: { type: Number, default: 1 },//0 gái,1 trai,2 khác

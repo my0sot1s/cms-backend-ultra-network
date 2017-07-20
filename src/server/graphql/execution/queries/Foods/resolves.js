@@ -7,3 +7,5 @@ export const getFood = async (root, args, context) => {
 export const getFoods = () => {
   return Foods.find().exec()
 }
+
+export default { getFoods, getFood }

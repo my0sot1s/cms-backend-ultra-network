@@ -1,7 +1,14 @@
 export default {
-  getFood: require('./Foods/resolves').getFood,
-  getFoods: require('./Foods/resolves').getFoods
+  // Note: getFoods single and multiple
+  ...require('./Foods/resolves').default,
+
+  // Note: getStories single and multiple
+  ...require('./Stories/resolves').default,
+
+  // Note: getStoryContent single and multiple
+  ...require('./StoryContent/resolves').default,
 }
+
 export const queryDef = [
-  require('./Foods/queryDef').default,
+  require('./queryDef').default,
 ]

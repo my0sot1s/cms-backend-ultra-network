@@ -1,9 +1,10 @@
 export default {
-  addFood: require('./Foods/resolves').addFood,
-  editFood: require('./Foods/resolves').editFood,
-  removeFood: require('./Foods/resolves').removeFood
+  // Note: mutation of foods with add,edit,remove
+  ...require("./Foods/resolves").default,
+
+
 }
 
 export const mutationDef = [
-  require('./Foods/mutationDef').default,
+  require('./mutationDef').default,
 ]

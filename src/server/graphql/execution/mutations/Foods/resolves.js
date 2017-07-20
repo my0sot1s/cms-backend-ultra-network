@@ -29,3 +29,5 @@ export const removeFood = (root, { id }) => {
     .then(() => ({ state: { state: 'done' } }))
     .catch(() => ({ state: { state: "can't delete" } }))
 }
+
+export default { addFood, editFood, removeFood }

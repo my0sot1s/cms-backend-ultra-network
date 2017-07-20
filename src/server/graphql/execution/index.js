@@ -13,7 +13,9 @@ export default {
   // Thực thi subscription
   Subscription: {
     ...require('./subscriptions').default
-  }
+  },
+  // Note: other
+  ...require('./types').typeResolves,
 }
 
 export const typeDefs = [
@@ -29,4 +31,6 @@ export const typeDefs = [
   // Note: get all define subscription
   // Lấy các định nghĩa về truy vấn. subscription
   require('./subscriptions').subscriptionsDef,
+
+
 ]
