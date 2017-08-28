@@ -1,9 +1,4 @@
-import {
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLList
-} from 'graphql'
-// import { createTypeWithPagination } from 'graphql/utils'
+import { GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql'
 import { FoodsType, FoodsInputType } from '../../types/Foods'
 import Foods from '../../../models/Foods'
 // import { pubsub } from '../../schema'

@@ -7,9 +7,15 @@ import path from 'path'
 import './models'
 import controller from './controller'
 import { middleware } from './middleware/index'
-import schema from './graphql/schema'
+// import schema from './graphql/schema'
 import { execute, subscribe } from 'graphql';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
+
+
+
+import schema from './__graphql__/schema'
+
+
+import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
 let PORT = process.env.PORT || 3001
