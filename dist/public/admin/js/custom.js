@@ -1,12 +1,12 @@
-"use strict";$(document).ready(function () {
+$(document).ready(function(){
 
 
-  $(".submenu > a").click(function (e) {
+  $(".submenu > a").click(function(e) {
     e.preventDefault();
     var $li = $(this).parent("li");
     var $ul = $(this).next("ul");
 
-    if ($li.hasClass("open")) {
+    if($li.hasClass("open")) {
       $ul.slideUp(350);
       $li.removeClass("open");
     } else {
@@ -16,5 +16,5 @@
       $li.addClass("open");
     }
   });
-
+  
 });

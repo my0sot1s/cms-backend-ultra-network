@@ -1,36 +1,36 @@
-"use strict"; /**
-              * Danish translations
-              */
-(function ($) {
+/**
+* Danish translations
+*/
+(function($){
     $.fn.wysihtml5.locale["da-DK"] = {
         font_styles: {
             normal: "Normal tekst",
             h1: "Overskrift 1",
             h2: "Overskrift 2",
-            h3: "Overskrift 3" },
-
+            h3: "Overskrift 3"
+        },
         emphasis: {
             bold: "Fed",
             italic: "Kursiv",
-            underline: "Understreget" },
-
+            underline: "Understreget"
+        },
         lists: {
             unordered: "Uordnet liste",
             ordered: "Ordnet liste",
             outdent: "Udryk",
-            indent: "Indryk" },
-
+            indent: "Indryk"
+        },
         link: {
             insert: "Indsæt Link",
-            cancel: "Annuler" },
-
+            cancel: "Annuler"
+        },
         image: {
             insert: "Indsæt billede",
-            cancel: "Annuler" },
-
+            cancel: "Annuler"
+        },
         html: {
-            edit: "Rediger HTML" },
-
+            edit: "Rediger HTML"
+        },
         colours: {
             black: "Sort",
             silver: "Sølv",
@@ -42,7 +42,7 @@
             olive: "Lysegrøn",
             navy: "Mørkeblå",
             blue: "Blå",
-            orange: "Orange" } };
-
-
-})(jQuery);
+            orange: "Orange"
+        }
+    };
+}(jQuery));

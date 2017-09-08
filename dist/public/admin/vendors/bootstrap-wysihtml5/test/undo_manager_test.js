@@ -1,18 +1,18 @@
-"use strict";if (wysihtml5.browser.supportsCommand(document, "insertHTML")) {
+if (wysihtml5.browser.supportsCommand(document, "insertHTML")) {
 
   module("wysihtml5.UndoManager", {
-    setup: function setup() {
-      this.textareaElement = document.createElement("textarea");
-      this.textareaElement.value = "1";
+    setup: function() {
+      this.textareaElement        = document.createElement("textarea");
+      this.textareaElement.value  = "1";
 
       this.form = document.createElement("form");
-      this.form.onsubmit = function () {return false;};
+      this.form.onsubmit = function() { return false; };
       this.form.appendChild(this.textareaElement);
 
       document.body.appendChild(this.form);
     },
 
-    teardown: function teardown() {
+    teardown: function() {
       var leftover;
       while (leftover = document.querySelector("iframe.wysihtml5-sandbox, input[name='_wysihtml5_mode']")) {
         leftover.parentNode.removeChild(leftover);
@@ -20,39 +20,39 @@
       this.form.parentNode.removeChild(this.form);
     },
 
-    triggerUndo: function triggerUndo(editor) {
+    triggerUndo: function(editor) {
       this.triggerKey(editor, 90);
     },
 
-    triggerRedo: function triggerRedo(editor) {
+    triggerRedo: function(editor) {
       this.triggerKey(editor, 89);
     },
 
-    triggerKey: function triggerKey(editor, keyCode) {
+    triggerKey: function(editor, keyCode) {
       var event;
       try {
         event = editor.composer.sandbox.getDocument().createEvent("KeyEvents");
         event.initKeyEvent("keydown", true, true, editor.composer.sandbox.getWindow(), true, false, false, false, keyCode, keyCode);
-      } catch (e) {
+      } catch(e) {
         event = editor.composer.sandbox.getDocument().createEvent("Events");
         event.initEvent("keydown", true, true);
         event.ctrlKey = true;
         event.keyCode = keyCode;
       }
       editor.composer.element.dispatchEvent(event);
-    } });
+    }
+  });
 
 
-
-  asyncTest("Basic test", function () {
+  asyncTest("Basic test", function() {
     expect(5);
 
-    var that = this;
+    var that   = this;
     // editor = new wysihtml5.Editor(this.textareaElement);
     $(this.textareaElement).wysihtml5();
     var editor = $(this.textareaElement).data('wysihtml5').editor;
 
-    editor.on("load", function () {
+    editor.on("load", function() {
       editor.setValue("1 2").fire("newword:composer");
       editor.setValue("1 2 3").fire("newword:composer");
       editor.setValue("1 2 3 4").fire("newword:composer");
@@ -78,15 +78,15 @@
   });
 
 
-  asyncTest("Test commands", function () {
+  asyncTest("Test commands", function() {
     expect(3);
 
-    var that = this;
+    var that   = this;
     // editor = new wysihtml5.Editor(this.textareaElement);
     $(this.textareaElement).wysihtml5();
     var editor = $(this.textareaElement).data('wysihtml5').editor;
 
-    editor.on("load", function () {
+    editor.on("load", function() {
       editor.setValue("<b>1</b>").fire("beforecommand:composer");
       editor.setValue("<i><b>1</b></i>").fire("beforecommand:composer");
 

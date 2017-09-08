@@ -1,36 +1,36 @@
-"use strict"; /**
-               * Czech translation for bootstrap-wysihtml5
-               */
-(function ($) {
+/**
+ * Czech translation for bootstrap-wysihtml5
+ */
+(function($){
     $.fn.wysihtml5.locale["cs-CZ"] = {
         font_styles: {
             normal: "Normální text",
             h1: "Nadpis úrovně 1",
             h2: "Nadpis úrovně 2",
-            h3: "Nadpis úrovně 3" },
-
+            h3: "Nadpis úrovně 3"
+        },
         emphasis: {
             bold: "Tučné",
             italic: "Kurzíva",
-            underline: "Podtržení" },
-
+            underline: "Podtržení"
+        },
         lists: {
             unordered: "Seznam s odrážkami",
             ordered: "Číslovaný seznam",
             outdent: "Zvětšit odsazení",
-            indent: "Zmenšit odsazení" },
-
+            indent: "Zmenšit odsazení"
+        },
         link: {
             insert: "Vložit odkaz",
-            cancel: "Zrušit" },
-
+            cancel: "Zrušit"
+        },
         image: {
             insert: "Vložit obrázek",
-            cancel: "Zrušit" },
-
+            cancel: "Zrušit"
+        },
         html: {
-            edit: "Upravit HTML" },
-
+            edit: "Upravit HTML"
+        },
         colours: {
             black: "Černá",
             silver: "Stříbrná",
@@ -42,7 +42,7 @@
             olive: "Olivová",
             navy: "Tmavomodrá",
             blue: "Modrá",
-            orange: "Oranžová" } };
-
-
-})(jQuery);
+            orange: "Oranžová"
+        }
+    };
+}(jQuery));

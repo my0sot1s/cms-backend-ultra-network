@@ -1,36 +1,36 @@
-"use strict"; /**
-               * Brazilian portuguese translation for bootstrap-wysihtml5
-               */
-(function ($) {
+/**
+ * Brazilian portuguese translation for bootstrap-wysihtml5
+ */
+(function($){
     $.fn.wysihtml5.locale["pt-BR"] = {
         font_styles: {
             normal: "Texto normal",
             h1: "Título 1",
             h2: "Título 2",
-            h3: "Título 3" },
-
+            h3: "Título 3"
+        },
         emphasis: {
             bold: "Negrito",
             italic: "Itálico",
-            underline: "Sublinhado" },
-
+            underline: "Sublinhado"
+        },
         lists: {
             unordered: "Lista",
             ordered: "Lista numerada",
             outdent: "Remover indentação",
-            indent: "Indentar" },
-
+            indent: "Indentar"
+        },
         link: {
             insert: "Inserir link",
-            cancel: "Cancelar" },
-
+            cancel: "Cancelar"
+        },
         image: {
             insert: "Inserir imagem",
-            cancel: "Cancelar" },
-
+            cancel: "Cancelar"
+        },
         html: {
-            edit: "Editar HTML" },
-
+            edit: "Editar HTML"
+        },
         colours: {
             black: "Preto",
             silver: "Prata",
@@ -42,7 +42,7 @@
             olive: "Oliva",
             navy: "Marinho",
             blue: "Azul",
-            orange: "Laranja" } };
-
-
-})(jQuery);
+            orange: "Laranja"
+        }
+    };
+}(jQuery));

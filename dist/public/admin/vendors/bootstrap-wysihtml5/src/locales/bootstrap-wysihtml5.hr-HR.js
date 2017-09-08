@@ -1,36 +1,36 @@
-"use strict"; /**
-               * Croatian localisation for bootstrap-wysihtml5
-               */
-(function ($) {
+/**
+ * Croatian localisation for bootstrap-wysihtml5
+ */
+(function($){
     $.fn.wysihtml5.locale["hr-HR"] = {
         font_styles: {
             normal: "Normalan tekst",
             h1: "Naslov 1",
             h2: "Naslov 2",
-            h3: "Naslov 3" },
-
+            h3: "Naslov 3"
+        },
         emphasis: {
             bold: "Podebljano",
             italic: "Nakrivljeno",
-            underline: "Podcrtano" },
-
+            underline: "Podcrtano"
+        },
         lists: {
             unordered: "Nesortirana lista",
             ordered: "Sortirana lista",
             outdent: "Izdubi",
-            indent: "Udubi" },
-
+            indent: "Udubi"
+        },
         link: {
             insert: "Umetni poveznicu",
-            cancel: "Otkaži" },
-
+            cancel: "Otkaži"
+        },
         image: {
             insert: "Umetni sliku",
-            cancel: "Otkaži" },
-
+            cancel: "Otkaži"
+        },
         html: {
-            edit: "Izmjeni HTML" },
-
+            edit: "Izmjeni HTML"
+        },
         colours: {
             black: "Crna",
             silver: "Srebrna",
@@ -42,7 +42,7 @@
             olive: "Maslinasta",
             navy: "Mornarska",
             blue: "Plava",
-            orange: "Narandžasta" } };
-
-
-})(jQuery);
+            orange: "Narandžasta"
+        }
+    };
+}(jQuery));

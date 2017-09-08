@@ -1,100 +1,100 @@
-'use strict';var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;}; /* ============================================================
-                                                                                                                                                                                                                                                                                        * bootstrap-button.js v2.0.2
-                                                                                                                                                                                                                                                                                        * http://twitter.github.com/bootstrap/javascript.html#buttons
-                                                                                                                                                                                                                                                                                        * ============================================================
-                                                                                                                                                                                                                                                                                        * Copyright 2012 Twitter, Inc.
-                                                                                                                                                                                                                                                                                        *
-                                                                                                                                                                                                                                                                                        * Licensed under the Apache License, Version 2.0 (the "License");
-                                                                                                                                                                                                                                                                                        * you may not use this file except in compliance with the License.
-                                                                                                                                                                                                                                                                                        * You may obtain a copy of the License at
-                                                                                                                                                                                                                                                                                        *
-                                                                                                                                                                                                                                                                                        * http://www.apache.org/licenses/LICENSE-2.0
-                                                                                                                                                                                                                                                                                        *
-                                                                                                                                                                                                                                                                                        * Unless required by applicable law or agreed to in writing, software
-                                                                                                                                                                                                                                                                                        * distributed under the License is distributed on an "AS IS" BASIS,
-                                                                                                                                                                                                                                                                                        * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-                                                                                                                                                                                                                                                                                        * See the License for the specific language governing permissions and
-                                                                                                                                                                                                                                                                                        * limitations under the License.
-                                                                                                                                                                                                                                                                                        * ============================================================ */
+/* ============================================================
+ * bootstrap-button.js v2.0.2
+ * http://twitter.github.com/bootstrap/javascript.html#buttons
+ * ============================================================
+ * Copyright 2012 Twitter, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ============================================================ */
 
-!function ($) {
+!function( $ ){
 
-  "use strict";
+  "use strict"
 
-  /* BUTTON PUBLIC CLASS DEFINITION
-                 * ============================== */
+ /* BUTTON PUBLIC CLASS DEFINITION
+  * ============================== */
 
-  var Button = function Button(element, options) {
-    this.$element = $(element);
-    this.options = $.extend({}, $.fn.button.defaults, options);
-  };
+  var Button = function ( element, options ) {
+    this.$element = $(element)
+    this.options = $.extend({}, $.fn.button.defaults, options)
+  }
 
   Button.prototype = {
 
-    constructor: Button,
+      constructor: Button
 
-    setState: function setState(state) {
-      var d = 'disabled',
-      $el = this.$element,
-      data = $el.data(),
-      val = $el.is('input') ? 'val' : 'html';
+    , setState: function ( state ) {
+        var d = 'disabled'
+          , $el = this.$element
+          , data = $el.data()
+          , val = $el.is('input') ? 'val' : 'html'
 
-      state = state + 'Text';
-      data.resetText || $el.data('resetText', $el[val]());
+        state = state + 'Text'
+        data.resetText || $el.data('resetText', $el[val]())
 
-      $el[val](data[state] || this.options[state]);
+        $el[val](data[state] || this.options[state])
 
-      // push to event loop to allow forms to submit
-      setTimeout(function () {
-        state == 'loadingText' ?
-        $el.addClass(d).attr(d, d) :
-        $el.removeClass(d).removeAttr(d);
-      }, 0);
-    },
+        // push to event loop to allow forms to submit
+        setTimeout(function () {
+          state == 'loadingText' ?
+            $el.addClass(d).attr(d, d) :
+            $el.removeClass(d).removeAttr(d)
+        }, 0)
+      }
 
-    toggle: function toggle() {
-      var $parent = this.$element.parent('[data-toggle="buttons-radio"]');
+    , toggle: function () {
+        var $parent = this.$element.parent('[data-toggle="buttons-radio"]')
 
-      $parent && $parent.
-      find('.active').
-      removeClass('active');
+        $parent && $parent
+          .find('.active')
+          .removeClass('active')
 
-      this.$element.toggleClass('active');
-    }
+        this.$element.toggleClass('active')
+      }
+
+  }
 
 
+ /* BUTTON PLUGIN DEFINITION
+  * ======================== */
 
-
-    /* BUTTON PLUGIN DEFINITION
-       * ======================== */ };
-
-  $.fn.button = function (option) {
+  $.fn.button = function ( option ) {
     return this.each(function () {
-      var $this = $(this),
-      data = $this.data('button'),
-      options = (typeof option === 'undefined' ? 'undefined' : _typeof(option)) == 'object' && option;
-      if (!data) $this.data('button', data = new Button(this, options));
-      if (option == 'toggle') data.toggle();else
-      if (option) data.setState(option);
-    });
-  };
+      var $this = $(this)
+        , data = $this.data('button')
+        , options = typeof option == 'object' && option
+      if (!data) $this.data('button', (data = new Button(this, options)))
+      if (option == 'toggle') data.toggle()
+      else if (option) data.setState(option)
+    })
+  }
 
   $.fn.button.defaults = {
-    loadingText: 'loading...' };
+    loadingText: 'loading...'
+  }
+
+  $.fn.button.Constructor = Button
 
 
-  $.fn.button.Constructor = Button;
-
-
-  /* BUTTON DATA-API
-                                     * =============== */
+ /* BUTTON DATA-API
+  * =============== */
 
   $(function () {
-    $('body').on('click.button.data-api', '[data-toggle^=button]', function (e) {
-      var $btn = $(e.target);
-      if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn');
-      $btn.button('toggle');
-    });
-  });
+    $('body').on('click.button.data-api', '[data-toggle^=button]', function ( e ) {
+      var $btn = $(e.target)
+      if (!$btn.hasClass('btn')) $btn = $btn.closest('.btn')
+      $btn.button('toggle')
+    })
+  })
 
-}(window.jQuery);
+}( window.jQuery );
