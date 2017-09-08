@@ -27,6 +27,7 @@ const app = express()
 // create server ws for graphql suubscrition
 // Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/admin')));
 // help express can read param with ?
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,6 +40,9 @@ app.get('/', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/index.html'))
 })
 
+app.get('/blog_them', (req, res) => {
+  res.sendfile(path.join(__dirname, 'public/blog.html'))
+})
 // Note: Load all controllers is a array.
 // router uri: api/{router_name}
 const len = controller.length;

@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = "\ntype Channel {\n\t_id: ID\n\ttitle: String\n  avatar: String\n}";

@@ -28,4 +28,6 @@ var removeFood = exports.removeFood = function removeFood(root, _ref3) {var id =
   var deletedFood = _Foods2.default.findByIdAndRemove(id).
   then(function () {return { state: { state: 'done' } };}).
   catch(function () {return { state: { state: "can't delete" } };});
-};
+};exports.default =
+
+{ addFood: addFood, editFood: editFood, removeFood: removeFood };

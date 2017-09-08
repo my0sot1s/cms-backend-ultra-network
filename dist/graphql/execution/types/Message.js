@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = "\ntype Message {\n\t_id: ID\n\ttext: String\n\tcreatedBy: User\n\tdateCreate: String\n}";

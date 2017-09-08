@@ -5,4 +5,5 @@ export default [
   require('./Center').default,
   require('./Foods').default,
   require('./Fb').default,
+  require('./Blog').default,
 ]

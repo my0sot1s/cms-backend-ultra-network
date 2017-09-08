@@ -4,14 +4,19 @@ var _bodyParser = require('body-parser');var _bodyParser2 = _interopRequireDefau
 var _cors = require('cors');var _cors2 = _interopRequireDefault(_cors);
 var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mongoose);
 var _path = require('path');var _path2 = _interopRequireDefault(_path);
-var _Foods = require('./models/Foods');var _Foods2 = _interopRequireDefault(_Foods);
 require('./models');
 var _controller = require('./controller');var _controller2 = _interopRequireDefault(_controller);
 var _index = require('./middleware/index');
-var _schema = require('./graphql/schema');var _schema2 = _interopRequireDefault(_schema);
+
 var _graphql = require('graphql');
+
+
+
+var _schema = require('./__graphql__/schema');var _schema2 = _interopRequireDefault(_schema);
+
+
 var _subscriptionsTransportWs = require('subscriptions-transport-ws');
-var _graphqlServerExpress = require('graphql-server-express');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}
+var _graphqlServerExpress = require('graphql-server-express');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}} // import schema from './graphql/schema'
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
 var PORT = process.env.PORT || 3001;
 process.env.NODE_ENV = PORT === 3001 ? 'development' : "production";
@@ -22,6 +27,7 @@ var app = (0, _express2.default)();
 // create server ws for graphql suubscrition
 // Set our static file directory to public
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
+app.use(_express2.default.static(_path2.default.join(__dirname, 'public/admin')));
 // help express can read param with ?
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
@@ -34,6 +40,9 @@ app.get('/', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/index.html'));
 });
 
+app.get('/blog_them', function (req, res) {
+  res.sendfile(_path2.default.join(__dirname, 'public/blog.html'));
+});
 // Note: Load all controllers is a array.
 // router uri: api/{router_name}
 var len = _controller2.default.length;

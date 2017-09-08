@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = "\ntype StoryContent {\n  _id: ID!\n  banner: String\n  content: [String]\n  images: [String]\n  postId: ID\n}\ninput StoryContentInput {\n  banner: String\n  content: [String]\n  images: [String]\n  postId: ID\n}\n";

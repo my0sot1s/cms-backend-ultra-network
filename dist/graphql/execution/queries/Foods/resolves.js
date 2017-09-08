@@ -6,4 +6,6 @@ var getFood = exports.getFood = async function getFood(root, args, context) {
 
 var getFoods = exports.getFoods = function getFoods() {
   return _Foods2.default.find().exec();
-};
+};exports.default =
+
+{ getFoods: getFoods, getFood: getFood };
