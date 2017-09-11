@@ -3,11 +3,11 @@ import {
   GraphQLID
 } from 'graphql'
 
-import { StoriesType } from '../../types/Stories'
-import Stories from '../../../models/Stories'
+import { BlogType } from '../../types/Blog'
+import Blog from '../../../models/Blog'
 
 export default {
-  type: StoriesType,
+  type: BlogType,
   args: {
     id: {
       name: 'ID',
@@ -15,6 +15,6 @@ export default {
     },
   },
   resolve(root, params) {
-    return Stories.findById(params.id).exec()
+    return Blog.findById(params.id).exec()
   }
 }

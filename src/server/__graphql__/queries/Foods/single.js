@@ -6,7 +6,7 @@ import {
 import { FoodsType } from '../../types/Foods'
 import Foods from '../../../models/Foods'
 
-const query = {
+export default {
   type: FoodsType,
   args: {
     id: {
@@ -18,5 +18,3 @@ const query = {
     return Foods.findById(params.id).exec()
   }
 }
-
-export default query

@@ -4,9 +4,9 @@
 
 
 var _Foods = require('../../types/Foods');
-var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefault(_Foods2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefault(_Foods2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 
-var query = {
+{
   type: _Foods.FoodsType,
   args: {
     id: {
@@ -16,7 +16,4 @@ var query = {
 
   resolve: function resolve(root, params) {
     return _Foods3.default.findById(params.id).exec();
-  } };exports.default =
-
-
-query;
+  } };

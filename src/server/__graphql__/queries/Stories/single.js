@@ -6,7 +6,7 @@ import {
 import { StoriesType } from '../../types/Stories'
 import Stories from '../../../models/Stories'
 
-const query = {
+export default {
   type: StoriesType,
   args: {
     id: {
@@ -18,5 +18,3 @@ const query = {
     return Stories.findById(params.id).exec()
   }
 }
-
-export default query

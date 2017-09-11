@@ -4,9 +4,9 @@
 
 
 var _Stories = require('../../types/Stories');
-var _Stories2 = require('../../../models/Stories');var _Stories3 = _interopRequireDefault(_Stories2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _Stories2 = require('../../../models/Stories');var _Stories3 = _interopRequireDefault(_Stories2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 
-var query = {
+{
   type: new _graphql.GraphQLList(_Stories.StoriesType),
   resolve: function resolve() {
     var stories = _Stories3.default.find().exec();
@@ -14,7 +14,4 @@ var query = {
     return new Error('No items....');else
 
     return stories;
-  } };exports.default =
-
-
-query;
+  } };

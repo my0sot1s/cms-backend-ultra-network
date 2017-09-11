@@ -4,11 +4,11 @@ import {
   GraphQLInt,
   GraphQLList
 } from 'graphql'
-import { FoodsType } from '../../types/Foods'
-import Foods from '../../../models/Foods'
+import { BlogType } from '../../types/Blog'
+import Blog from '../../../models/Blog'
 
 export default {
-  type: new GraphQLList(FoodsType),
+  type: new GraphQLList(BlogType),
   args: {
     page: {
       type: GraphQLInt
@@ -22,10 +22,14 @@ export default {
     let _page = !page || isNaN(page) ? 0 : page
     let _limit = !limit || isNaN(limit) ? 5 : limit
     let _skip = _limit * _page
-    const foods = Foods.find().sort().skip(_skip).limit(_limit).exec()
-    if (!foods)
+    const blog = Blog
+      .find()
+      .sort()
+      .skip(_skip)
+      .limit(_limit).exec()
+    if (!blog)
       return new Error('No items....')
     else
-      return foods
+      return blog
   }
 }

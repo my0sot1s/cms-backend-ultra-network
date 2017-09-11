@@ -4,11 +4,11 @@
 
 
 
-var _Foods = require('../../types/Foods');
-var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefault(_Foods2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
+var _Blog = require('../../types/Blog');
+var _Blog2 = require('../../../models/Blog');var _Blog3 = _interopRequireDefault(_Blog2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 
 {
-  type: new _graphql.GraphQLList(_Foods.FoodsType),
+  type: new _graphql.GraphQLList(_Blog.BlogType),
   args: {
     page: {
       type: _graphql.GraphQLInt },
@@ -22,9 +22,13 @@ var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefa
     var _page = !page || isNaN(page) ? 0 : page;
     var _limit = !limit || isNaN(limit) ? 5 : limit;
     var _skip = _limit * _page;
-    var foods = _Foods3.default.find().sort().skip(_skip).limit(_limit).exec();
-    if (!foods)
+    var blog = _Blog3.default.
+    find().
+    sort().
+    skip(_skip).
+    limit(_limit).exec();
+    if (!blog)
     return new Error('No items....');else
 
-    return foods;
+    return blog;
   } };

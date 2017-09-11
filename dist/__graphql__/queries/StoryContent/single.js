@@ -4,9 +4,9 @@
 
 
 var _Stories = require('../../types/Stories');
-var _Stories2 = require('../../../models/Stories');var _Stories3 = _interopRequireDefault(_Stories2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _Stories2 = require('../../../models/Stories');var _Stories3 = _interopRequireDefault(_Stories2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 
-var query = {
+{
   type: _Stories.StoriesType,
   args: {
     id: {
@@ -16,7 +16,4 @@ var query = {
 
   resolve: function resolve(root, params) {
     return _Stories3.default.findById(params.id).exec();
-  } };exports.default =
-
-
-query;
+  } };

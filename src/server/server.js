@@ -9,7 +9,9 @@ import controller from './controller'
 import { middleware } from './middleware/index'
 // import schema from './graphql/schema'
 import { execute, subscribe } from 'graphql';
-
+import session from 'express-session'
+import passport from 'passport'
+import uuid from 'node-uuid'
 
 
 import schema from './__graphql__/schema'
@@ -28,6 +30,12 @@ const app = express()
 // Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/admin')));
+// app.use(session({
+//   genid: function (req) {
+//     return uuid.v4();
+//   },
+//   secret: `Z3]GJW!?9uP”/Kpe`
+// }));
 // help express can read param with ?
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,6 +51,7 @@ app.get('/', (req, res) => {
 app.get('/blog_them', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/blog.html'))
 })
+
 // Note: Load all controllers is a array.
 // router uri: api/{router_name}
 const len = controller.length;
@@ -100,5 +109,4 @@ wsServe.listen(PORT, () => {
       path: '/subscriptions',
     });
 })
-
 

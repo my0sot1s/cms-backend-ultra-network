@@ -6,7 +6,7 @@ import {
 import { StoryContentType } from '../../types/StoryContent'
 import StoryContent from '../../../models/StoryContent'
 
-const query = {
+export default {
   type: new GraphQLList(StoryContentType),
   resolve() {
     const content = StoryContent.find().exec()
@@ -16,5 +16,3 @@ const query = {
       return content
   }
 }
-
-export default query
