@@ -6,19 +6,20 @@
   "scripts": {
     "dev": "nodemon ./src/server/server.js --exec babel-node -e js ",
     "single": "babel src/server/ --out-dir dist",
-    "build": "babel src/server --out-dir dist --ignore src/server/__graphql__ --ignore src/server/public && git add . && git commit -m 'auto commit' && git push",
+    "prebuild": "babel src/server --out-dir dist --ignore src/server/__graphql__ --ignore src/server/public ",
+    "build": "git add . && git commit -m 'auto commit' && git push",
     "start": "NODE_ENV=production node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/my0sot1s/socketSevers.git"
+    "url": "git+https://github.com/my0sot1s/sidra.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/my0sot1s/socketSevers/issues"
+    "url": "https://github.com/my0sot1s/sidra/issues"
   },
   "homepage": "https://github.com/my0sot1s/socketSevers#readme",
   "dependencies": {
