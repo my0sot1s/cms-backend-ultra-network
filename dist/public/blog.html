@@ -142,7 +142,7 @@
         link = $("#link").val(),
         tag = $("#tag").val(),
         content = tinyMCE.activeEditor.getContent({ format: 'raw' });
-      if (title == "" || link == "" || content == "" || tag == "")
+      if (title == "" || url == "" || content == "" || tag == "")
         alert("Không đê trống!!!");
       else {
         $.post("/api/blog", { title, tag, link, content }, function (data) {
