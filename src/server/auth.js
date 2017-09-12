@@ -8,6 +8,7 @@ import * as _ from './models/User'
 passport.use('local', new LocalStrategy(
   function (username, password, done) {
     _.login(username, password, (errKey, isDone, user) => {
+      debugger
       if (!errKey && isDone) {
         return done(errKey, user);
       } else {
@@ -18,12 +19,13 @@ passport.use('local', new LocalStrategy(
   }
 ));
 passport.serializeUser(function (user, done) {
-  done(null, user._id);
+  done(null, user.id);
   // if you use Model.id as your idAttribute maybe you'd want
   // done(null, user.id);
 });
 passport.deserializeUser(function (id, done) {
-  _.default.findById(id, (err, user) => {
+  var M = _.default;
+  M.findById(id, (err, user) => {
     return done(err, user);
   });
 });

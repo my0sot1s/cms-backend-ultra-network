@@ -58,9 +58,12 @@ app.all('*', _index.middleware.header);
 
 // app.all('*', middleware.)
 
-// app.get('/', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../admin/blank-page.html'))
-// })
+app.get('/', function (req, res) {
+  // if (req.isAuthenticated())
+  res.sendFile(_path2.default.join(__dirname, 'public/index.html'));
+  // else 
+  // res.sendFile(path.join(__dirname, '/public/login.html'))
+});
 app.get('/test', function (req, res) {
   if (req.isAuthenticated())
   res.send("Login");else

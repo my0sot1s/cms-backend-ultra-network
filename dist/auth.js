@@ -8,6 +8,7 @@ var _User = require('./models/User');var _ = _interopRequireWildcard(_User);func
 _passport2.default.use('local', new LocalStrategy(
 function (username, password, done) {
   _.login(username, password, function (errKey, isDone, user) {
+    debugger;
     if (!errKey && isDone) {
       return done(errKey, user);
     } else {
@@ -18,12 +19,13 @@ function (username, password, done) {
 }));
 
 _passport2.default.serializeUser(function (user, done) {
-  done(null, user._id);
+  done(null, user.id);
   // if you use Model.id as your idAttribute maybe you'd want
   // done(null, user.id);
 });
 _passport2.default.deserializeUser(function (id, done) {
-  _.default.findById(id, function (err, user) {
+  var M = _.default;
+  M.findById(id, function (err, user) {
     return done(err, user);
   });
 });
