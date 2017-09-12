@@ -31,7 +31,8 @@ require("./auth");
 // create server ws for graphql suubscrition
 // Set our static file directory to public
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
-app.use(_express2.default.static(_path2.default.join(__dirname, 'public/admin')));
+// app.use(express.static(path.join(__dirname, 'public/admin')));
+// app.use(express.static(path.join(__dirname, '../admin')));
 app.use(require('cookie-parser')());
 // Create sesstion
 app.use((0, _expressSession2.default)({
@@ -44,24 +45,22 @@ app.use((0, _expressSession2.default)({
   saveUninitialized: true }));
 
 
-app.use(_passport2.default.initialize());
-app.use(_passport2.default.session());
-
-
 // end session
 
 // help express can read param with ?
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use((0, _cors2.default)());
+app.use(_passport2.default.initialize());
 app.use(_passport2.default.session());
 //Allow CORS
 app.all('*', _index.middleware.header);
+
 // app.all('*', middleware.)
 
-app.get('/', function (req, res) {
-  res.sendFile(_path2.default.join(__dirname, 'public/index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../admin/blank-page.html'))
+// })
 app.get('/test', function (req, res) {
   if (req.isAuthenticated())
   res.send("Login");else
@@ -69,7 +68,7 @@ app.get('/test', function (req, res) {
 });
 app.route("/login").
 get(function (req, res) {
-  res.sendFile(_path2.default.join(__dirname, 'public/login.html'));
+  res.sendFile(_path2.default.join(__dirname, '/public/login.html'));
 }).
 post(_passport2.default.authenticate('local',
 {
@@ -77,8 +76,12 @@ post(_passport2.default.authenticate('local',
   successRedirect: '/' }));
 
 
-app.get('/blog_them', function (req, res) {
-  res.sendFile(_path2.default.join(__dirname, 'public/blog.html'));
+app.get('/create-blog', function (req, res) {
+  if (req.isAuthenticated()) {
+    res.sendFile(_path2.default.join(__dirname, '/public/blog.html'));
+  } else {
+    res.sendFile(_path2.default.join(__dirname, '/public/login.html'));
+  }
 });
 
 // Note: Load all controllers is a array.
@@ -137,4 +140,8 @@ wsServe.listen(PORT, function () {
     server: wsServe,
     path: '/subscriptions' });
 
+});
+
+app.get("*", function (req, res) {
+  res.status(404).sendFile(_path2.default.join(__dirname, '/public/page-error.html'));
 });

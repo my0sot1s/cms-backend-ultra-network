@@ -31,7 +31,8 @@ require("./auth");
 // create server ws for graphql suubscrition
 // Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/admin')));
+// app.use(express.static(path.join(__dirname, 'public/admin')));
+// app.use(express.static(path.join(__dirname, '../admin')));
 app.use(require('cookie-parser')());
 // Create sesstion
 app.use(session({
@@ -44,24 +45,22 @@ app.use(session({
   saveUninitialized: true,
 
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 // end session
 
 // help express can read param with ?
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
+app.use(passport.initialize());
 app.use(passport.session());
 //Allow CORS
 app.all('*', middleware.header);
+
 // app.all('*', middleware.)
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'))
-})
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../admin/blank-page.html'))
+// })
 app.get('/test', (req, res) => {
   if (req.isAuthenticated())
     res.send("Login");
@@ -69,7 +68,7 @@ app.get('/test', (req, res) => {
 })
 app.route("/login")
   .get((req, res) => {
-    res.sendFile(path.join(__dirname, 'public/login.html'))
+    res.sendFile(path.join(__dirname, '/public/login.html'))
   })
   .post(passport.authenticate('local'
     , {
@@ -77,8 +76,12 @@ app.route("/login")
       successRedirect: '/'
     }));
 
-app.get('/blog_them', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/blog.html'))
+app.get('/create-blog', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.sendFile(path.join(__dirname, '/public/blog.html'))
+  } else {
+    res.sendFile(path.join(__dirname, '/public/login.html'))
+  }
 })
 
 // Note: Load all controllers is a array.
@@ -137,5 +140,9 @@ wsServe.listen(PORT, () => {
       server: wsServe,
       path: '/subscriptions',
     });
+})
+
+app.get("*", (req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '/public/page-error.html'))
 })
 

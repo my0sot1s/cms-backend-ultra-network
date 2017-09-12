@@ -1,50 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Nói với Phương</title>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries-->
+  <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+    script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+    -->
 </head>
 
-<body>
-  <div class="text-center" style="padding:50px 0">
-    <div class="logo" style="text-align: center;">Login</div>
-    <!-- Main Form -->
-    <div class="login-form-1" style="margin-left:40%;">
-      <form id="login-form" class="text-left">
-        <div class="login-form-main-message"></div>
-        <div class="main-login-form">
-          <div class="login-group">
-            <div class="form-group">
-              <label for="lg_username" class="sr-only">Username</label>
-              <input type="text" class="form-control" id="lg_username" name="lg_username">
-            </div>
-            <div class="form-group">
-              <label for="lg_password" class="sr-only">Password</label>
-              <input type="password" class="form-control" id="lg_password" name="lg_password">
-            </div>
-            <div class="form-group login-group-checkbox">
-              <input type="checkbox" id="lg_remember" name="lg_remember">
-              <label for="lg_remember">Remember</label>
-            </div>
-          </div>
-          <button type="button" class="login-button" onclick="sendReqLogin()"><i class="fa fa-chevron-right"></i></button>
+<body class="sidebar-mini fixed">
+  <section class="material-half-bg">
+    <div class="cover"></div>
+  </section>
+  <section class="login-content">
+    <div class="logo">
+      <h1>Nói Với Phương</h1>
+    </div>
+    <div class="login-box">
+      <form class="login-form" action="index.html">
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
+        <div class="form-group">
+          <label class="control-label">USERNAME</label>
+          <input class="form-control lg_username" type="text" placeholder="UserName/Email" autofocus>
         </div>
-        <div class="etc-login-form">
-          <p>Forgot your password? <a href="#">Click here</a></p>
-          <p>New user? <a href="#">Create new account</a></p>
+        <div class="form-group">
+          <label class="control-label">PASSWORD</label>
+          <input class="form-control lg_password" type="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <div class="utility">
+            <div class="animated-checkbox">
+              <label class="semibold-text">
+                    <input type="checkbox"><span class="label-text">Stay Signed in</span>
+                  </label>
+            </div>
+            <p class="semibold-text mb-0"><a data-toggle="flip">Forgot Password ?</a></p>
+          </div>
+        </div>
+        <div class="form-group btn-container">
+          <button type="button" class="btn btn-primary btn-block" onclick="sendReqLogin();"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+        </div>
+      </form>
+      <form class="forget-form" action="index.html">
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
+        <div class="form-group">
+          <label class="control-label">EMAIL</label>
+          <input class="form-control" type="text" placeholder="Email">
+        </div>
+        <div class="form-group btn-container">
+          <button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>
+        </div>
+        <div class="form-group mt-20">
+          <p class="semibold-text mb-0"><a data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
         </div>
       </form>
     </div>
-    <!-- end:Main Form -->
-  </div>
+  </section>
+  <!-- Javascripts-->
+  <script src="js/jquery-2.1.4.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/plugins/pace.min.js"></script>
+  <script src="js/main.js"></script>
   <script>
     function sendReqLogin() {
       var username = $("#lg_username").val(), password = $("#lg_password").val();

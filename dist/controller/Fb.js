@@ -29,7 +29,9 @@ async function getInfor(_body) {
   return arr;
 
 }
-
+router.get('/fb', function (req, res) {
+  res.sendFile("..");
+});
 // https://graph.facebook.com/v2.9/1632062990381722/members?limit=10&access_token=125391211209683|oCDtzfS1snnja0vN0fyYQE7uFeo
 router.get('/fb/:id', function (req, res) {
   var limit = Number(req.query.limit) || 5;
