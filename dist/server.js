@@ -19,34 +19,63 @@ var _schema = require('./__graphql__/schema');var _schema2 = _interopRequireDefa
 
 var _subscriptionsTransportWs = require('subscriptions-transport-ws');
 var _graphqlServerExpress = require('graphql-server-express');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}} // import schema from './graphql/schema'
+
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
-var PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3001,
+secret = '3223g41T/Kai0shin][Sama';
 process.env.NODE_ENV = PORT === 3001 ? 'development' : "production";
 console.log('Running...' + process.env.NODE_ENV);
 var app = (0, _express2.default)();
-
+require("./auth");
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
 // create server ws for graphql suubscrition
 // Set our static file directory to public
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public')));
 app.use(_express2.default.static(_path2.default.join(__dirname, 'public/admin')));
-// app.use(session({
-//   genid: function (req) {
-//     return uuid.v4();
-//   },
-//   secret: `Z3]GJW!?9uP”/Kpe`
-// }));
+app.use(require('cookie-parser')());
+// Create sesstion
+app.use((0, _expressSession2.default)({
+  genid: function genid(req) {
+    return _nodeUuid2.default.v4();
+  },
+  secret: secret,
+  proxy: true,
+  resave: true,
+  saveUninitialized: true }));
+
+
+app.use(_passport2.default.initialize());
+app.use(_passport2.default.session());
+
+
+// end session
+
 // help express can read param with ?
 app.use(_bodyParser2.default.json());
 app.use(_bodyParser2.default.urlencoded({ extended: false }));
 app.use((0, _cors2.default)());
+app.use(_passport2.default.session());
 //Allow CORS
 app.all('*', _index.middleware.header);
 // app.all('*', middleware.)
 
 app.get('/', function (req, res) {
-  res.sendfile(_path2.default.join(__dirname, 'public/index.html'));
+  res.sendFile(_path2.default.join(__dirname, 'public/index.html'));
 });
+app.get('/test', function (req, res) {
+  if (req.isAuthenticated())
+  res.send("Login");else
+  res.send("Chưa login mà");
+});
+app.route("/login").
+get(function (req, res) {
+  res.sendFile(_path2.default.join(__dirname, 'public/login.html'));
+}).
+post(_passport2.default.authenticate('local',
+{
+  failureRedirect: '/login',
+  successRedirect: '/' }));
+
 
 app.get('/blog_them', function (req, res) {
   res.sendfile(_path2.default.join(__dirname, 'public/blog.html'));

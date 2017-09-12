@@ -19,34 +19,63 @@ import schema from './__graphql__/schema'
 
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
+
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
 let PORT = process.env.PORT || 3001
+  , secret = `3223g41T/Kai0shin][Sama`
 process.env.NODE_ENV = PORT === 3001 ? 'development' : "production"
 console.log(`Running...${process.env.NODE_ENV}`)
 const app = express()
-
+require("./auth");
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
 // create server ws for graphql suubscrition
 // Set our static file directory to public
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/admin')));
-// app.use(session({
-//   genid: function (req) {
-//     return uuid.v4();
-//   },
-//   secret: `Z3]GJW!?9uP”/Kpe`
-// }));
+app.use(require('cookie-parser')());
+// Create sesstion
+app.use(session({
+  genid: function (req) {
+    return uuid.v4();
+  },
+  secret: secret,
+  proxy: true,
+  resave: true,
+  saveUninitialized: true,
+
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// end session
+
 // help express can read param with ?
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors())
+app.use(passport.session());
 //Allow CORS
 app.all('*', middleware.header);
 // app.all('*', middleware.)
 
 app.get('/', (req, res) => {
-  res.sendfile(path.join(__dirname, 'public/index.html'))
+  res.sendFile(path.join(__dirname, 'public/index.html'))
 })
+app.get('/test', (req, res) => {
+  if (req.isAuthenticated())
+    res.send("Login");
+  else res.send("Chưa login mà");
+})
+app.route("/login")
+  .get((req, res) => {
+    res.sendFile(path.join(__dirname, 'public/login.html'))
+  })
+  .post(passport.authenticate('local'
+    , {
+      failureRedirect: '/login',
+      successRedirect: '/'
+    }));
 
 app.get('/blog_them', (req, res) => {
   res.sendfile(path.join(__dirname, 'public/blog.html'))

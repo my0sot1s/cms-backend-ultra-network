@@ -71,6 +71,7 @@ export const register = (doc, cb) => {
  * @param {Function} cb 
  */
 export const login = (userName, passWord, cb) => {
+
   Model.find({ userName }, (err, resp) => {
     if (err) throw new Error(err)
     else {

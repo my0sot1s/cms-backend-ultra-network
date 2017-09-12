@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Login</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="text-center" style="padding:50px 0">
+    <div class="logo" style="text-align: center;">login</div>
+    <!-- Main Form -->
+    <div class="login-form-1" style="margin-left:40%;">
+      <form id="login-form" class="text-left">
+        <div class="login-form-main-message"></div>
+        <div class="main-login-form">
+          <div class="login-group">
+            <div class="form-group">
+              <label for="lg_username" class="sr-only">Username</label>
+              <input type="text" class="form-control" id="lg_username" name="lg_username">
+            </div>
+            <div class="form-group">
+              <label for="lg_password" class="sr-only">Password</label>
+              <input type="password" class="form-control" id="lg_password" name="lg_password">
+            </div>
+            <div class="form-group login-group-checkbox">
+              <input type="checkbox" id="lg_remember" name="lg_remember">
+              <label for="lg_remember">Remember</label>
+            </div>
+          </div>
+          <button type="button" class="login-button" onclick="sendReqLogin()"><i class="fa fa-chevron-right"></i></button>
+        </div>
+        <div class="etc-login-form">
+          <p>Forgot your password? <a href="#">Click here</a></p>
+          <p>New user? <a href="#">Create new account</a></p>
+        </div>
+      </form>
+    </div>
+    <!-- end:Main Form -->
+  </div>
+  <script>
+    function sendReqLogin() {
+      var username = $("#lg_username").val(), password = $("#lg_password").val();
+      $.post("/login", { username, password }, (data) => {
+        console.log(data);
+      });
+    }
+  </script>
+</body>
+
+</html>
