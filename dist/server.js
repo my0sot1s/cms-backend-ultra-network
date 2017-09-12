@@ -78,7 +78,7 @@ post(_passport2.default.authenticate('local',
 
 
 app.get('/blog_them', function (req, res) {
-  res.sendfile(_path2.default.join(__dirname, 'public/blog.html'));
+  res.sendFile(_path2.default.join(__dirname, 'public/blog.html'));
 });
 
 // Note: Load all controllers is a array.

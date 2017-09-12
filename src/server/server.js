@@ -78,7 +78,7 @@ app.route("/login")
     }));
 
 app.get('/blog_them', (req, res) => {
-  res.sendfile(path.join(__dirname, 'public/blog.html'))
+  res.sendFile(path.join(__dirname, 'public/blog.html'))
 })
 
 // Note: Load all controllers is a array.
