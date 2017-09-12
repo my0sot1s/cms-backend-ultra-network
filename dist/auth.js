@@ -8,12 +8,11 @@ var _User = require('./models/User');var _ = _interopRequireWildcard(_User);func
 _passport2.default.use('local', new LocalStrategy(
 function (username, password, done) {
   _.login(username, password, function (errKey, isDone, user) {
-    debugger;
     if (!errKey && isDone) {
       return done(errKey, user);
     } else {
       // throw new Error('invalid username or password');
-      return done(errKey, null);
+      return done(errKey, isDone);
     }
   });
 }));

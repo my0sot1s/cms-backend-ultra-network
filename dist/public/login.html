@@ -73,7 +73,7 @@
   <script src="js/main.js"></script>
   <script>
     function sendReqLogin() {
-      var username = $("#lg_username").val(), password = $("#lg_password").val();
+      var username = $(".lg_username").val(), password = $(".lg_password").val();
       $.post("/login", { username, password }, (data) => {
         console.log(data);
       });

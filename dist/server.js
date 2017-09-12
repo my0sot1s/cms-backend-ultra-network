@@ -75,10 +75,21 @@ get(function (req, res) {
 }).
 post(_passport2.default.authenticate('local',
 {
-  failureRedirect: '/login',
-  successRedirect: '/' }));
-
-
+  failureRedirect: '/login'
+  // successRedirect: '/'
+}),
+function (req, res) {
+  res.redirect('/');
+});
+app.get("/logout", function (req, res, next) {
+  req.logout();
+  req.session.save(function (err) {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/login');
+  });
+});
 app.get('/create-blog', function (req, res) {
   if (req.isAuthenticated()) {
     res.sendFile(_path2.default.join(__dirname, '/public/blog.html'));

@@ -71,7 +71,7 @@ var register = exports.register = function register(doc, cb) {
     * @param {Function} cb 
     */
 var login = exports.login = function login(userName, passWord, cb) {
-
+  debugger;
   Model.find({ userName: userName }, function (err, resp) {
     if (err) throw new Error(err);else
     {

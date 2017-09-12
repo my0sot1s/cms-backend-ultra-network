@@ -9,7 +9,6 @@ git clone https://github.com/my0sot1s/sidra.git
 npm install
 ```
 
-
 # Example with [Graphiql](http:localhost:3001/graphiql)
 
 
@@ -58,7 +57,13 @@ subscription{
   }
 }
 ```
+## Tài liệu tham khảo
 
+- https://github.com/abhiaiyer91/GraphQL-Chat
 
+- https://github.com/benawad/hello_world_reactql/tree/6_subscriptions
+- https://github.com/benawad/graphql-express-template
+
+- Authen of https://github.com/mjhea0/passport-local-express4.git
 
 

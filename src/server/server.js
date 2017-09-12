@@ -76,9 +76,20 @@ app.route("/login")
   .post(passport.authenticate('local'
     , {
       failureRedirect: '/login',
-      successRedirect: '/'
-    }));
-
+      // successRedirect: '/'
+    }),
+  (req, res) => {
+    res.redirect('/');
+  });
+app.get("/logout", (req, res, next) => {
+  req.logout();
+  req.session.save((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/login');
+  });
+})
 app.get('/create-blog', (req, res) => {
   if (req.isAuthenticated()) {
     res.sendFile(path.join(__dirname, '/public/blog.html'))
