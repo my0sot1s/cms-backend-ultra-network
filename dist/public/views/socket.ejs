@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<%-include("partials/head.ejs",{title:"Socket - Nói với em"})%>
+
+<body class="sidebar-mini fixed">
+  <div class="wrapper">
+  <%- include("partials/header.ejs")%>
+  <%- include("partials/nav.ejs")%>
+  
+    <div class="content-wrapper">
+      <div class="page-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> Socket </h1>
+          <p>Start a beautiful journey here</p>
+        </div>
+        <div>
+          <ul class="breadcrumb">
+            <li><i class="fa fa-home fa-lg"></i></li>
+            <li><a href="#">Socket Page</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <input type="text" id='u' /><br>
+              <input type="password" id='p' /><br>
+              <input type="button" value="Login" onclick="login()" />
+              <br/>
+              <select id="mySelect">
+                  <option value='default'>default</option>
+                  <option value='room1'>room1</option>
+                  <option value='persional'>personal</option>
+                  <option value='vip'>vip</option>
+                </select>
+              <input type="text" id='input' />
+              <button onclick="sendNewMessage()">Send</button>
+              <button onclick="changeRoom()">change room</button>
+              </br>
+              <button onclick="disconnector()">disconnect</button>
+              <br/>
+              <ul id='ul'>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <%- include("partials/scripts.ejs")%>
+   <script>
+    let userId = ''//session id
+    var socket = io.connect();
+    let onRoom = 'default'
+    // socket.on("authen", ({ id }) => {
+    //   userId = id
+    // });
+
+    let e = document.getElementById("mySelect")
+    // onRoom = e.options[e.selectedIndex].value
+    socket.emit("join_room", onRoom);
+    socket.on('leave_room_done', data => {
+      addNode(data)
+    })
+    socket.on('join_room_done', data => {
+      addNode(data)
+    })
+    function login() {
+      var u = document.getElementById('u').value
+      var p = document.getElementById('p').value
+      socket.emit('login', ({ u, p }))
+    }
+    socket.on('r_login', res => {
+      if (res.ok) {
+        debugger
+        userId = res.infor._id;
+        socket.emit('authen', { userId })
+      } else {
+        debugger
+      }
+    })
+    function addNode(data) {
+      var node = document.createElement('li')
+      var text = document.createTextNode(data)
+      node.appendChild(text)
+      document.getElementById('ul').appendChild(node)
+    }
+    socket.on('new_message', data => {
+      addNode('=> ' + data)
+    })
+    function sendNewMessage() {
+      var val = document.getElementById('input').value;
+      if (val === '' || !val) return
+      else
+        socket.emit("send_message", {
+          userId,
+          room_name: onRoom,
+          msg: userId + ": " + val
+        });
+      addNode('You: ' + val)
+      document.getElementById('input').value = ''
+    }
+    function changeRoom() {
+      var oldRoom = onRoom;
+      onRoom = e.options[e.selectedIndex].value
+      socket.emit("switch_room", {
+        old_room: oldRoom, new_room: onRoom
+      });
+    }
+    function disconnector() {
+      socket.emit('leave_room', { userId, room_name: 'room1' })
+    }
+    // socket.on('news', function (data) {
+    //   console.log(data);
+    //   socket.emit('my other event', { my: 'data' });
+    // });
+  </script>
+</body>
+
+</html>

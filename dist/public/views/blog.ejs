@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<%-include("partials/head.ejs",{title:"Blog - Nói với em"})%>
+
+<body class="sidebar-mini fixed">
+  <div class="wrapper">
+  <%- include("partials/header.ejs")%>
+  <%- include("partials/nav.ejs")%>
+  
+    <div class="content-wrapper">
+      <div class="page-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> Blog </h1>
+          <p>Start a beautiful journey here</p>
+        </div>
+        <div>
+          <ul class="breadcrumb">
+            <li><i class="fa fa-home fa-lg"></i></li>
+            <li><a href="#">Blog Page</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+           <div class="card-body">
+              <div class="panel-body">
+                <form action="">
+                  <fieldset>
+                    <div class="form-group">
+                      <label>Title</label>
+                      <input class="form-control" placeholder="Title" type="text" id="title">
+                    </div>
+                    <div class="form-group">
+                      <label>URL</label>
+                      <input class="form-control" placeholder="URL" type="text" id="link">
+                    </div>
+                    <div class="form-group">
+                      <label>Tag</label>
+                      <input class="form-control" placeholder="Tag" type="text" id="tag">
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+              <div class="content-box-large">
+                <div class="panel-heading">
+                  <div class="panel-title">Content</div>
+
+                  <div class="panel-options">
+                    <a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+                    <a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <textarea id="tinymce_full" id="content"></textarea>
+                </div>
+                <div>
+                  <button class="btn btn-primary" onclick="sendData()">
+                        <i class="fa fa-save"></i> Submit
+                      </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <%- include("partials/scripts.ejs")%>
+  <script type="text/javascript" src="js/tinymce/js/tinymce/tinymce.min.js"></script>
+  <script src="js/editors.js"></script>
+  <script>
+    function sendData() {
+      var title = $("#title").val(),
+        link = $("#link").val(),
+        tag = $("#tag").val(),
+        content = tinyMCE.activeEditor.getContent({ format: 'raw' });
+      if (title == "" || link == "" || content == "" || tag == "")
+        alert("Không đê trống!!!");
+      else {
+        $.post("/api/blog", { title, tag, link, content }, function (data) {
+          alert("Done!")
+        })
+      }
+    }
+  </script>
+</body>
+
+</html>
