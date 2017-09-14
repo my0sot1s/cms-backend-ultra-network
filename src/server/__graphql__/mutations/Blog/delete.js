@@ -5,6 +5,7 @@ import {
 } from 'graphql'
 import { BlogType, BlogInputType } from '../../types/Blog'
 import Blog from '../../../models/Blog'
+import { publishEvent } from '../../subscriptions'
 
 export default {
   type: BlogType,
@@ -16,7 +17,11 @@ export default {
   },
   resolve(root, params) {
     return Blog.findByIdAndRemove(params.id)
-      .then(data => Blog.findById(data.id).exec())
+      .then(data => {
+        var doc = { _id: params.id }
+        publishEvent('onDeleteBlog', doc)
+        return doc;
+      })
       .catch(err => new Error('Not Success'))
   }
 }

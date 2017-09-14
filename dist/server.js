@@ -10,12 +10,10 @@ var _index = require('./middleware/index');
 
 var _graphql = require('graphql');
 var _expressSession = require('express-session');var _expressSession2 = _interopRequireDefault(_expressSession);
+var _schema = require('./__graphql__/schema');var _schema2 = _interopRequireDefault(_schema);
 var _passport = require('passport');var _passport2 = _interopRequireDefault(_passport);
 var _nodeUuid = require('node-uuid');var _nodeUuid2 = _interopRequireDefault(_nodeUuid);
-
-
-var _schema = require('./__graphql__/schema');var _schema2 = _interopRequireDefault(_schema);
-
+var _ejs = require('ejs');var _ejs2 = _interopRequireDefault(_ejs);
 
 var _subscriptionsTransportWs = require('subscriptions-transport-ws');
 var _graphqlServerExpress = require('graphql-server-express');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}} // import schema from './graphql/schema'
@@ -27,6 +25,8 @@ process.env.NODE_ENV = PORT === 3001 ? 'development' : "production";
 console.log('Running...' + process.env.NODE_ENV);
 var app = (0, _express2.default)();
 require("./auth");
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/public/views'); // trỏ vào thư mục view để chứa các file template
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
 // create server ws for graphql suubscrition
 // Set our static file directory to public
@@ -58,52 +58,7 @@ app.all('*', _index.middleware.header);
 
 // app.all('*', middleware.)
 
-app.get('/', function (req, res) {
-  // if (req.isAuthenticated())
-  res.sendFile(_path2.default.join(__dirname, 'public/index.html'));
-  // else 
-  // res.sendFile(path.join(__dirname, '/public/login.html'))
-});
-app.get('/test', function (req, res) {
-  if (req.isAuthenticated())
-  res.send("Login");else
-  res.send("Chưa login mà");
-});
-app.route("/login").
-get(function (req, res) {
-  res.sendFile(_path2.default.join(__dirname, '/public/login.html'));
-}).
-post(_passport2.default.authenticate('local',
-{
-  failureRedirect: '/login'
-  // successRedirect: '/'
-}),
-function (req, res) {
-  res.redirect('/');
-});
-app.get("/logout", function (req, res, next) {
-  req.logout();
-  req.session.save(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/login');
-  });
-});
-app.get('/create-blog', function (req, res) {
-  if (req.isAuthenticated()) {
-    res.sendFile(_path2.default.join(__dirname, '/public/blog.html'));
-  } else {
-    res.sendFile(_path2.default.join(__dirname, '/public/login.html'));
-  }
-});
-
-// Note: Load all controllers is a array.
-// router uri: api/{router_name}
-var len = _controller2.default.length;
-for (var i = 0; i < len; i++) {
-  app.use('/api', (0, _cors2.default)(_index.middleware.cors), _controller2.default[i]);
-}
+require("./rest").default(app, _controller2.default, _cors2.default, _index.middleware);
 
 // Note: deploy map graphql to express
 // connect to !/graphiql in dev mode

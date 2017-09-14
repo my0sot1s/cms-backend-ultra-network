@@ -22,7 +22,7 @@ export default {
     let _page = !page || isNaN(page) ? 0 : page
     let _limit = !limit || isNaN(limit) ? 5 : limit
     let _skip = _limit * _page
-    const foods = Foods.find().sort().skip(_skip).limit(_limit).exec()
+    const foods = Foods.find().sort({ dateCreate: -1 }).skip(_skip).limit(_limit).exec()
     if (!foods)
       return new Error('No items....')
     else

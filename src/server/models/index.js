@@ -8,7 +8,7 @@ const connectModel = async () => {
 }
 connectModel()
 mongoose.connection.on('error', function (err) {
-  console.log(err)
+  console.log("Không có kết nối mạng tới clouds db");
 });
 mongoose.connection.on('connected', function () {
   console.log('Mongoose default connection');

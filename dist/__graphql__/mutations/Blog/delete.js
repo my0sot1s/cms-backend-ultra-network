@@ -4,7 +4,8 @@
 
 
 var _Blog = require('../../types/Blog');
-var _Blog2 = require('../../../models/Blog');var _Blog3 = _interopRequireDefault(_Blog2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
+var _Blog2 = require('../../../models/Blog');var _Blog3 = _interopRequireDefault(_Blog2);
+var _subscriptions = require('../../subscriptions');function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 
 {
   type: _Blog.BlogType,
@@ -16,6 +17,10 @@ var _Blog2 = require('../../../models/Blog');var _Blog3 = _interopRequireDefault
 
   resolve: function resolve(root, params) {
     return _Blog3.default.findByIdAndRemove(params.id).
-    then(function (data) {return _Blog3.default.findById(data.id).exec();}).
+    then(function (data) {
+      var doc = { _id: params.id };
+      (0, _subscriptions.publishEvent)('onDeleteBlog', doc);
+      return doc;
+    }).
     catch(function (err) {return new Error('Not Success');});
   } };

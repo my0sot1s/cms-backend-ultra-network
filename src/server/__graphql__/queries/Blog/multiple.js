@@ -24,7 +24,7 @@ export default {
     let _skip = _limit * _page
     const blog = Blog
       .find()
-      .sort()
+      .sort({ dateCreate: -1 })
       .skip(_skip)
       .limit(_limit).exec()
     if (!blog)

@@ -6,6 +6,7 @@ import {
 // import { createTypeWithPagination } from 'graphql/utils'
 import { BlogType, BlogInputType } from '../../types/Blog'
 import Blog from '../../../models/Blog'
+import { publishEvent } from '../../subscriptions'
 
 export default {
   type: BlogType,
@@ -25,7 +26,11 @@ export default {
         ...params.data
       }
     })
-      .then(data => Blog.findById(data.id).exec())
+      .then(async data => {
+        var doc = await Blog.findById(data.id).exec();
+        publishEvent('onUpdateBlog', doc)
+        return doc;
+      })
       .catch(err => new Error('Not Success'))
   }
 }

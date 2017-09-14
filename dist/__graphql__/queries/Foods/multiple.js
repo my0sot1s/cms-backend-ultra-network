@@ -22,7 +22,7 @@ var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefa
     var _page = !page || isNaN(page) ? 0 : page;
     var _limit = !limit || isNaN(limit) ? 5 : limit;
     var _skip = _limit * _page;
-    var foods = _Foods3.default.find().sort().skip(_skip).limit(_limit).exec();
+    var foods = _Foods3.default.find().sort({ dateCreate: -1 }).skip(_skip).limit(_limit).exec();
     if (!foods)
     return new Error('No items....');else
 

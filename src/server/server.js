@@ -10,12 +10,10 @@ import { middleware } from './middleware/index'
 // import schema from './graphql/schema'
 import { execute, subscribe } from 'graphql';
 import session from 'express-session'
+import schema from './__graphql__/schema'
 import passport from 'passport'
 import uuid from 'node-uuid'
-
-
-import schema from './__graphql__/schema'
-
+import ejs from 'ejs'
 
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
@@ -27,6 +25,8 @@ process.env.NODE_ENV = PORT === 3001 ? 'development' : "production"
 console.log(`Running...${process.env.NODE_ENV}`)
 const app = express()
 require("./auth");
+app.set('view engine', 'ejs');
+app.set('views', __dirname + '/public/views'); // trỏ vào thư mục view để chứa các file template
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
 // create server ws for graphql suubscrition
 // Set our static file directory to public
@@ -58,52 +58,7 @@ app.all('*', middleware.header);
 
 // app.all('*', middleware.)
 
-app.get('/', (req, res) => {
-  // if (req.isAuthenticated())
-  res.sendFile(path.join(__dirname, 'public/index.html'))
-  // else 
-  // res.sendFile(path.join(__dirname, '/public/login.html'))
-})
-app.get('/test', (req, res) => {
-  if (req.isAuthenticated())
-    res.send("Login");
-  else res.send("Chưa login mà");
-})
-app.route("/login")
-  .get((req, res) => {
-    res.sendFile(path.join(__dirname, '/public/login.html'))
-  })
-  .post(passport.authenticate('local'
-    , {
-      failureRedirect: '/login',
-      // successRedirect: '/'
-    }),
-  (req, res) => {
-    res.redirect('/');
-  });
-app.get("/logout", (req, res, next) => {
-  req.logout();
-  req.session.save((err) => {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/login');
-  });
-})
-app.get('/create-blog', (req, res) => {
-  if (req.isAuthenticated()) {
-    res.sendFile(path.join(__dirname, '/public/blog.html'))
-  } else {
-    res.sendFile(path.join(__dirname, '/public/login.html'))
-  }
-})
-
-// Note: Load all controllers is a array.
-// router uri: api/{router_name}
-const len = controller.length;
-for (var i = 0; i < len; i++) {
-  app.use('/api', cors(middleware.cors), controller[i])
-}
+require("./rest").default(app, controller, cors, middleware);
 
 // Note: deploy map graphql to express
 // connect to !/graphiql in dev mode

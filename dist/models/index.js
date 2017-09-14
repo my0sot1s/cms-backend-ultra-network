@@ -8,7 +8,7 @@ var connectModel = async function connectModel() {
 };
 connectModel();
 _mongoose2.default.connection.on('error', function (err) {
-  console.log(err);
+  console.log("Không có kết nối mạng tới clouds db");
 });
 _mongoose2.default.connection.on('connected', function () {
   console.log('Mongoose default connection');

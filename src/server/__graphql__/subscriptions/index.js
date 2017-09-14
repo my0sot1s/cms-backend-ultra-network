@@ -1,7 +1,7 @@
 import { PubSub, SubscriptionManager } from 'graphql-subscriptions'
 import schema from '../schema'
-import Foods from './Blog_PS'
-import Blog from './Blog_PS'
+import Foods from './Foods'
+import Blog from './Blog'
 
 export const pubsub = new PubSub();
 

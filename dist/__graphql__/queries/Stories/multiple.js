@@ -9,7 +9,7 @@ var _Stories2 = require('../../../models/Stories');var _Stories3 = _interopRequi
 {
   type: new _graphql.GraphQLList(_Stories.StoriesType),
   resolve: function resolve() {
-    var stories = _Stories3.default.find().exec();
+    var stories = _Stories3.default.find().sort({ dateCreate: -1 }).exec();
     if (!stories)
     return new Error('No items....');else
 

@@ -24,7 +24,7 @@ var _Blog2 = require('../../../models/Blog');var _Blog3 = _interopRequireDefault
     var _skip = _limit * _page;
     var blog = _Blog3.default.
     find().
-    sort().
+    sort({ dateCreate: -1 }).
     skip(_skip).
     limit(_limit).exec();
     if (!blog)
