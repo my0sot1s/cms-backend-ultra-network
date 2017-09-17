@@ -5,45 +5,43 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import path from 'path'
 import './models'
-import controller from './controller'
-import { middleware } from './middleware/index'
-// import schema from './graphql/schema'
+import graphQLMiddleware, { headerMiddleware, corsMiddleware } from './utils/middlewares'
 import { execute, subscribe } from 'graphql';
 import session from 'express-session'
-import schema from './__graphql__/schema'
+import schema from './graphql/schema'
 import passport from 'passport'
 import uuid from 'node-uuid'
 import ejs from 'ejs'
-
+import * as cst from './utils/constants'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express'
 
 // http://dev.apollodata.com/tools/graphql-subscriptions/setup.html#subscription-server
-let PORT = process.env.PORT || 3001
-  , secret = `3223g41T/Kai0shin][Sama`
-process.env.NODE_ENV = PORT === 3001 ? 'development' : "production"
+// let PORT = process.env.PORT || 3001
+//   , secret = `3223g41T/Kai0shin][Sama`
+process.env.NODE_ENV = cst.PORT === cst.LOCAL_PORT
+  ? cst.DEVELOPMENT
+  : cst.PRODUCTION;
+
 console.log(`Running...${process.env.NODE_ENV}`)
 const app = express()
-require("./auth");
+require("./utils/authenticate");
 app.set('view engine', 'ejs');
-app.set('views', __dirname + '/public/views'); // trỏ vào thư mục view để chứa các file template
+app.set('views', path.join(__dirname, '../../public/views')); // trỏ vào thư mục view để chứa các file template
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
-// create server ws for graphql suubscrition
-// Set our static file directory to public
-app.use(express.static(path.join(__dirname, 'public')));
-// app.use(express.static(path.join(__dirname, 'public/admin')));
-// app.use(express.static(path.join(__dirname, '../admin')));
+
+app.use("/dashboard", express.static(path.join(__dirname, '../../public')));
+
 app.use(require('cookie-parser')());
 // Create sesstion
 app.use(session({
   genid: function (req) {
     return uuid.v4();
   },
-  secret: secret,
+  secret: cst.SESSION_SECRET,
   proxy: true,
   resave: true,
   saveUninitialized: true,
-
 }));
 // end session
 
@@ -54,17 +52,31 @@ app.use(cors())
 app.use(passport.initialize());
 app.use(passport.session());
 //Allow CORS
-app.all('*', middleware.header);
+app.all('*', headerMiddleware);
 
 // app.all('*', middleware.)
 
-require("./rest").default(app, controller, cors, middleware);
+// require("./rest").default(app, api, cors);
 
+// map controller to deploy
+// ready on start
+require("./controllers").default.map((value) => {
+  app.use('/dashboard', cors(corsMiddleware), value)
+});
+// map api to deploy
+// ready on start
+require("./api").default.map((value) => {
+  app.use('/api', cors(corsMiddleware), value)
+});
+// redirect to base.
+app.get("/", (req, res) => {
+  res.redirect("/dashboard")
+})
 // Note: deploy map graphql to express
 // connect to !/graphiql in dev mode
 app.use(
   '/graphql',
-  ...middleware.graphql,
+  ...graphQLMiddleware,
   graphqlExpress(req => {
     // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257
     const query = req.query.query || req.body.query;
@@ -95,8 +107,8 @@ const wsServe = createServer(app)
 
 // Note: server using port 3001 in development
 // work with socket
-wsServe.listen(PORT, () => {
-  console.log(`*** started at ${PORT} ***`)
+wsServe.listen(cst.PORT, () => {
+  console.log(`*** started at http://localhost:${cst.PORT} ***`)
   console.log(`+*******************************+`)
   // Note: Deploy subscription server
   // work with websocket at: ws://localhost:3001/subscriptions of course work with dev model
@@ -112,6 +124,6 @@ wsServe.listen(PORT, () => {
 })
 
 app.get("*", (req, res) => {
-  res.status(404).sendFile(path.join(__dirname, '/public/page-error.html'))
+  res.status(404).render("page-error");
 })
 

@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = "\n  type Subscription {\n    onSaveFood: Foods\n  }\n";
