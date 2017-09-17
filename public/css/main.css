@@ -1982,15 +1982,15 @@ output {
   color: #555555;
   background-color: #fff;
   background-image: none;
-  border: 2px solid #ccc;
-  border-radius: 3px;
+  border: 1px solid #ccc;
+  /* border-radius: 3px; */
   -webkit-transition: border-color ease-in-out 0.15s;
   -o-transition: border-color ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s;
 }
 
 .form-control:focus {
-  border: 2px solid #009688;
+  border: 1px solid #009688;
   outline: 0;
 }
 
@@ -14353,8 +14353,8 @@ be a descendant of the grid when it is being dragged.
   margin-top: -30px;
   margin-left: -30px;
   margin-right: -30px;
-  margin-bottom: 30px;
-  padding: 20px 30px;
+  margin-bottom: 15px;
+  padding: 5px 30px;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
           box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
@@ -14457,7 +14457,7 @@ be a descendant of the grid when it is being dragged.
   position: relative;
   background: #ffffff;
   border-radius: 3px;
-  padding: 20px;
+  padding: 10px;
   -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;

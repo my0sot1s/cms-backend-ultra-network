@@ -5,21 +5,10 @@
 <body class="sidebar-mini fixed">
   <div class="wrapper">
   <%- include("partials/header.ejs")%>
-  <%- include("partials/nav.ejs")%>
+  <%- include("partials/nav.ejs",{name:'soket'})%>
   
     <div class="content-wrapper">
-      <div class="page-title">
-        <div>
-          <h1><i class="fa fa-dashboard"></i> Socket </h1>
-          <p>Start a beautiful journey here</p>
-        </div>
-        <div>
-          <ul class="breadcrumb">
-            <li><i class="fa fa-home fa-lg"></i></li>
-            <li><a href="#">Socket Page</a></li>
-          </ul>
-        </div>
-      </div>
+    <%- include("partials/page-title.ejs",{title:'Socket'})%>
       <div class="row">
         <div class="col-md-12">
           <div class="card">

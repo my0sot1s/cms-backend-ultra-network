@@ -7,18 +7,7 @@
   <%- include("partials/header.ejs")%>
   <%- include("partials/nav.ejs",{name:"graphql"})%>
     <div class="content-wrapper">
-      <div class="page-title">
-        <div>
-          <h1><i class="fa fa-dashboard"></i>GraphQL</h1>
-          <p>Start a beautiful journey here</p>
-        </div>
-        <div>
-          <ul class="breadcrumb">
-            <li><i class="fa fa-home fa-lg"></i></li>
-            <li><a href="#">GraphQL</a></li>
-          </ul>
-        </div>
-      </div>
+      <%- include("partials/page-title.ejs",{title:'GraphQl'})%>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
@@ -33,9 +22,6 @@
    <script>
     var card = document.getElementsByTagName("iframe")[0];
     card.src = src;
-
-
-    /<p1\>(.*)</p\>/
   </script>
 </body>
 
