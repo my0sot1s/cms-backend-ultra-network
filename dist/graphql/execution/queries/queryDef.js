@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = "\ntype Query {\n  getFood(id:ID):Foods\n  getFoods:[Foods]\n\n  getStories: [Stories]\n  getStory(id:ID): Stories\n\n  getStoryContents: [StoryContent]\n  getStoryContent(id:ID): StoryContent\n}\n";

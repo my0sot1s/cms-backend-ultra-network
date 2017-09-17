@@ -27,10 +27,10 @@ console.log('Running...' + process.env.NODE_ENV);
 var app = (0, _express2.default)();
 require("./utils/authenticate");
 app.set('view engine', 'ejs');
-app.set('views', _path2.default.join(__dirname, '../../public/views')); // trỏ vào thư mục view để chứa các file template
+app.set('views', _path2.default.join(__dirname, '../public/views')); // trỏ vào thư mục view để chứa các file template
 // Note:ex at https://medium.com/@simontucker/building-chatty-a-whatsapp-clone-with-react-native-and-apollo-part-1-setup-68a02f7e11
 
-app.use("/dashboard", _express2.default.static(_path2.default.join(__dirname, '../../public')));
+app.use("/dashboard", _express2.default.static(_path2.default.join(__dirname, '../public')));
 
 app.use(require('cookie-parser')());
 // Create sesstion

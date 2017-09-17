@@ -1,1 +1,0 @@
-"use strict";Object.defineProperty(exports, "__esModule", { value: true });exports.default = "\ntype Mutation{\n  \n  addFood(input: FoodInput):Foods\n  editFood(id: ID, input: FoodInput):Foods\n  removeFood(id: ID):State\n\n}\n";

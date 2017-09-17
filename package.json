@@ -1,12 +1,12 @@
 {
-  "name": "socketSevers",
+  "name": "sidra",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/server/server.js --exec babel-node -e js ",
-    "single": "babel src/server/ --out-dir dist",
-    "prebuild": "babel src/server --out-dir dist --ignore src/server/graphql/__graphql__ --ignore public/",
+    "dev": "nodemon ./server/server.js --exec babel-node -e js ",
+    "single": "babel server/ --out-dir dist",
+    "prebuild": "babel server --out-dir dist --ignore server/graphql/__graphql__/ --ignore public/",
     "build": "git add . && git commit -m 'auto commit' && git push",
     "start": "NODE_ENV=production node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/my0sot1s/sidra/issues"
   },
-  "homepage": "https://github.com/my0sot1s/socketSevers#readme",
+  "homepage": "https://github.com/my0sot1s/sidra#readme",
   "dependencies": {
     "babel-runtime": "^6.23.0",
     "bluebird": "^3.5.0",

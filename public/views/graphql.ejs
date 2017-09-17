@@ -5,7 +5,7 @@
 <body class="sidebar-mini fixed">
   <div class="wrapper">
   <%- include("partials/header.ejs")%>
-  <%- include("partials/nav.ejs")%>
+  <%- include("partials/nav.ejs",{name:"graphql"})%>
     <div class="content-wrapper">
       <div class="page-title">
         <div>
@@ -33,6 +33,9 @@
    <script>
     var card = document.getElementsByTagName("iframe")[0];
     card.src = src;
+
+
+    /<p1\>(.*)</p\>/
   </script>
 </body>
 
