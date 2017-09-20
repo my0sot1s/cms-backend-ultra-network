@@ -7,7 +7,7 @@
     "dev": "nodemon ./server/server.js --exec babel-node -e js ",
     "single": "babel server/ --out-dir dist",
     "prebuild": "babel server --out-dir dist --ignore server/graphql/__graphql__/ --ignore public/",
-    "build": "git add . && git commit -m 'auto commit' && git push",
+    "build": "git add . && git commit -m 'auto commit' && git push && rm -rf dist",
     "start": "NODE_ENV=production node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

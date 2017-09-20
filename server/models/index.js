@@ -2,14 +2,14 @@ import mongoose from 'mongoose'
 mongoose.Promise = require('bluebird')
 //Connect to mongo DB database
 const connectModel = async () => {
-  return await mongoose.connect("mongodb://dev:1223@ds159328.mlab.com:59328/dbnode?admin?replicaSet=ds159328",
-    { useMongoClient: true }
-  )
+    return await mongoose.connect("mongodb://dev:1223@ds159328.mlab.com:59328/dbnode?admin?replicaSet=ds159328",
+        { useMongoClient: true }
+    )
 }
 connectModel()
 mongoose.connection.on('error', function (err) {
-  console.log("Không có kết nối mạng tới clouds db");
+    console.log("Không có kết nối mạng tới clouds db");
 });
 mongoose.connection.on('connected', function () {
-  console.log('Mongoose default connection');
+    console.log('Mongoose default connection');
 }); 

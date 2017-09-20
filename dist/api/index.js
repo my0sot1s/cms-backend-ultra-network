@@ -5,4 +5,5 @@ require('./Posts').default,
 require('./Center').default,
 require('./Foods').default,
 require('./Fb').default,
-require('./Blog').default];
+require('./Blog').default,
+require('./User').default];

@@ -6,4 +6,5 @@ export default [
   require('./Foods').default,
   require('./Fb').default,
   require('./Blog').default,
+  require('./User').default,
 ]

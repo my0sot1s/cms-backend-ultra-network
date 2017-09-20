@@ -4,6 +4,7 @@
 
 
 
+
 var _Foods = require('../../types/Foods');
 var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefault(_Foods2);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}exports.default =
 
@@ -12,6 +13,9 @@ var _Foods2 = require('../../../models/Foods');var _Foods3 = _interopRequireDefa
   args: {
     page: {
       type: _graphql.GraphQLInt },
+
+    access_token: {
+      type: _graphql.GraphQLString },
 
     limit: {
       type: _graphql.GraphQLInt } },

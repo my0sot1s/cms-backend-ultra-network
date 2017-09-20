@@ -2,6 +2,7 @@ import {
   GraphQLNonNull,
   GraphQLID,
   GraphQLInt,
+  GraphQLString,
   GraphQLList
 } from 'graphql'
 import { FoodsType } from '../../types/Foods'
@@ -12,6 +13,9 @@ export default {
   args: {
     page: {
       type: GraphQLInt
+    },
+    access_token: {
+      type: GraphQLString
     },
     limit: {
       type: GraphQLInt

@@ -8,33 +8,33 @@ router.post("/register", function (req, res, next) {
 
 });
 router.get("/login", function (req, res) {
-  res.render("login");
+    res.render("login");
 });
 
 router.post("/login-app", function (req, res, next) {var _req$body =
-  req.body,username = _req$body.username,password = _req$body.password;
-  User.login(username, password, function (err, isLogin, user) {
-    if (err || !isLogin) res.status(201).json({ err: err });
-    _jsonwebtoken2.default.sign({ username: username, date: Date.now() }, cst.STATIC_SECRET_TOKEN, { expiresIn: '1h' }, function (err, token) {
-      res.status(200).json({ username: username, token: token });
+    req.body,username = _req$body.username,password = _req$body.password;
+    User.login(username, password, function (err, isLogin, user) {
+        if (err || !isLogin) res.status(201).json({ err: err });
+        _jsonwebtoken2.default.sign({ username: username, date: Date.now() }, cst.STATIC_SECRET_TOKEN, { expiresIn: '1h' }, function (err, token) {
+            res.status(200).json({ username: username, token: token });
+        });
     });
-  });
 });
 
 router.post("/login", _passport2.default.authenticate('local',
 {
-  failureRedirect: '/dashboard/login',
-  successRedirect: '/dashboard' }));
+    failureRedirect: '/dashboard/login',
+    successRedirect: '/dashboard' }));
 
 
 router.get("/logout", function (req, res, next) {
-  req.logout();
-  req.session.save(function (err) {
-    if (err) {
-      return next(err);
-    }
-    res.redirect('/dashboard/login');
-  });
+    req.logout();
+    req.session.save(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/dashboard/login');
+    });
 });exports.default =
 
 router;

@@ -3,9 +3,9 @@ var _mongoose = require('mongoose');var _mongoose2 = _interopRequireDefault(_mon
 // import data from '../../data.json'
 
 var Schemas = _mongoose2.default.Schema({
-  text: { type: String },
-  createdBy: { type: _mongoose2.default.SchemaTypes.ObjectId },
-  dateCreate: { type: Date, default: Date.now() } });exports.default =
+    text: { type: String },
+    createdBy: { type: _mongoose2.default.SchemaTypes.ObjectId },
+    dateCreate: { type: Date, default: Date.now() } });exports.default =
 
 
 _mongoose2.default.model('Message', Schemas, 'Message');

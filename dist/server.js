@@ -35,13 +35,13 @@ app.use("/dashboard", _express2.default.static(_path2.default.join(__dirname, '.
 app.use(require('cookie-parser')());
 // Create sesstion
 app.use((0, _expressSession2.default)({
-  genid: function genid(req) {
-    return _nodeUuid2.default.v4();
-  },
-  secret: cst.SESSION_SECRET,
-  proxy: true,
-  resave: true,
-  saveUninitialized: true }));
+    genid: function genid(req) {
+        return _nodeUuid2.default.v4();
+    },
+    secret: cst.SESSION_SECRET,
+    proxy: true,
+    resave: true,
+    saveUninitialized: true }));
 
 // end session
 
@@ -61,16 +61,16 @@ app.all('*', _middlewares.headerMiddleware);
 // map controller to deploy
 // ready on start
 require("./controllers").default.map(function (value) {
-  app.use('/dashboard', (0, _cors2.default)(_middlewares.corsMiddleware), value);
+    app.use('/dashboard', (0, _cors2.default)(_middlewares.corsMiddleware), value);
 });
 // map api to deploy
 // ready on start
 require("./api").default.map(function (value) {
-  app.use('/api', (0, _cors2.default)(_middlewares.corsMiddleware), value);
+    app.use('/api', (0, _cors2.default)(_middlewares.corsMiddleware), value);
 });
 // redirect to base.
 app.get("/", function (req, res) {
-  res.redirect("/dashboard");
+    res.redirect("/dashboard");
 });
 // Note: deploy map graphql to express
 // connect to !/graphiql in dev mode
@@ -78,28 +78,26 @@ app.use.apply(app, [
 '/graphql'].concat(_toConsumableArray(_middlewares2.default), [
 
 (0, _graphqlServerExpress.graphqlExpress)(function (req) {
-  // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257
-  var query = req.query.query || req.body.query;
-  if (query && query.length > 2000) {
-    // None of our app's queries are this long
-    // Probably indicates someone trying to send an overly expensive query
-    throw new Error('Query too large.');
-  }
-  return {
-    schema: _schema2.default };
+    // https://github.com/graphql/express-graphql/blob/3fa6e68582d6d933d37fa9e841da5d2aa39261cd/src/index.js#L257
+    var query = req.query.query || req.body.query;
+    if (query && query.length > 2000) {
+        // None of our app's queries are this long
+        // Probably indicates someone trying to send an overly expensive query
+        throw new Error('Query too large.');
+    }
+    return {
+        schema: _schema2.default };
 
 })]));
 
 // app.use('/graphql', ...middleware.graphql, graphqlExpress({ schema: _schema }));
 // app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 app.use('/graphiql', (0, _graphqlServerExpress.graphiqlExpress)({
-  endpointURL: '/graphql',
-  subscriptionsEndpoint:
-  process.env.NODE_ENV === 'development' ? 'ws://localhost:3001/subscriptions' : 'wss://baseserver.herokuapp.com/subscriptions' }));
-
-
-
-
+    endpointURL: '/graphql',
+    subscriptionsEndpoint:
+    process.env.NODE_ENV === cst.DEVELOPMENT ?
+    cst.DEVELOPMENT_WS :
+    cst.PRODUCTION_WSS }));
 
 
 var wsServe = (0, _http.createServer)(app);
@@ -108,21 +106,21 @@ var wsServe = (0, _http.createServer)(app);
 // Note: server using port 3001 in development
 // work with socket
 wsServe.listen(cst.PORT, function () {
-  console.log('*** started at http://localhost:' + cst.PORT + ' ***');
-  console.log('+*******************************+');
-  // Note: Deploy subscription server
-  // work with websocket at: ws://localhost:3001/subscriptions of course work with dev model
-  // subscripts to recieve broadcast
-  new _subscriptionsTransportWs.SubscriptionServer({
-    execute: _graphql.execute,
-    subscribe: _graphql.subscribe,
-    schema: _schema2.default },
-  {
-    server: wsServe,
-    path: '/subscriptions' });
+    console.log('*** started at http://localhost:' + cst.PORT + ' ***');
+    console.log('+*******************************+');
+    // Note: Deploy subscription server
+    // work with websocket at: ws://localhost:3001/subscriptions of course work with dev model
+    // subscripts to recieve broadcast
+    new _subscriptionsTransportWs.SubscriptionServer({
+        execute: _graphql.execute,
+        subscribe: _graphql.subscribe,
+        schema: _schema2.default },
+    {
+        server: wsServe,
+        path: '/subscriptions' });
 
 });
 
 app.get("*", function (req, res) {
-  res.status(404).render("page-error");
+    res.status(404).render("page-error");
 });

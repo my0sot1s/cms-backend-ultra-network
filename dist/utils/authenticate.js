@@ -7,23 +7,23 @@ var _User = require('../models/User');var _ = _interopRequireWildcard(_User);fun
 
 _passport2.default.use('local', new LocalStrategy(
 function (username, password, done) {
-  _.login(username, password, function (errKey, isDone, user) {
-    if (!errKey && isDone) {
-      return done(errKey, user);
-    } else {
-      // throw new Error('invalid username or password');
-      return done(errKey, isDone);
-    }
-  });
+    _.login(username, password, function (errKey, isDone, user) {
+        if (!errKey && isDone) {
+            return done(errKey, user);
+        } else {
+            // throw new Error('invalid username or password');
+            return done(errKey, isDone);
+        }
+    });
 }));
 
 _passport2.default.serializeUser(function (user, done) {
-  done(null, user.id);
-  // if you use Model.id as your idAttribute maybe you'd want
-  // done(null, user.id);
+    done(null, user.id);
+    // if you use Model.id as your idAttribute maybe you'd want
+    // done(null, user.id);
 });
 _passport2.default.deserializeUser(function (id, done) {
-  _.default.findById(id, function (err, user) {
-    return done(err, user);
-  });
+    _.default.findById(id, function (err, user) {
+        return done(err, user);
+    });
 });

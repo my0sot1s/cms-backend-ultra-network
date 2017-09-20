@@ -3,14 +3,14 @@ var router = require("express").Router();
 
 
 router.get('/storycontent', function (req, res) {
-  var limit = Number(req.query.limit) || 5;
-  var page = Number(req.query.page) || 0;
-  (0, _StoryContent.find)(limit, page, req.query.postId).exec(function (err, data) {
-    if (!err && data) {
-      res.json(data);
-    } else
-    res.send(err);
-  });
+    var limit = Number(req.query.limit) || 5;
+    var page = Number(req.query.page) || 0;
+    (0, _StoryContent.find)(limit, page, req.query.postId).exec(function (err, data) {
+        if (!err && data) {
+            res.json(data);
+        } else
+        res.send(err);
+    });
 });exports.default =
 
 router;
