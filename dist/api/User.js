@@ -14,7 +14,7 @@ router.post('/login', function (req, res) {var _req$body =
 });
 router.post('/register', function (req, res) {var _req$body2 =
     req.body,username = _req$body2.username,password = _req$body2.password,email = _req$body2.email;
-    (0, _User.register)({ username: username, password: password }, function (err, user) {
+    (0, _User.register)({ username: username, password: password, email: email }, function (err, user) {
         if (err) res.status(201).json({ err: err });
         _jsonwebtoken2.default.sign({ username: username, date: Date.now() }, cst.STATIC_SECRET_TOKEN, { expiresIn: '1h' }, function (err, token) {
             res.status(200).json({ login: "success", username: username, token: token });

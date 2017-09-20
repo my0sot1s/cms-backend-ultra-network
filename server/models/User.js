@@ -52,7 +52,8 @@ const hash = (password, hashPass, salt) => {
  * @param {Function} cb 
  */
 export const register = (doc, cb) => {
-    crypto.pbkdf2(doc.password, doc.salt.toHexString(), 1000, 16, 'sha512', (err, derivedKey) => {
+    doc.salt = mongoose.Types.ObjectId().toHexString();
+    crypto.pbkdf2(doc.password, doc.salt, 1000, 16, 'sha512', (err, derivedKey) => {
         if (err) cb(err, null)
         else {
             doc.password = derivedKey.toString('hex')

@@ -52,7 +52,8 @@ var hash = function hash(password, hashPass, salt) {
     * @param {Function} cb 
     */
 var register = exports.register = function register(doc, cb) {
-    _crypto2.default.pbkdf2(doc.password, doc.salt.toHexString(), 1000, 16, 'sha512', function (err, derivedKey) {
+    doc.salt = _mongoose2.default.Types.ObjectId().toHexString();
+    _crypto2.default.pbkdf2(doc.password, doc.salt, 1000, 16, 'sha512', function (err, derivedKey) {
         if (err) cb(err, null);else
         {
             doc.password = derivedKey.toString('hex');

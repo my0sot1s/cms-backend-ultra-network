@@ -14,7 +14,7 @@ router.post('/login', function (req, res) {
 })
 router.post('/register', function (req, res) {
     const { username, password, email } = req.body;
-    register({ username, password }, function (err, user) {
+    register({ username, password, email }, function (err, user) {
         if (err) res.status(201).json({ err });
         jwt.sign({ username, date: Date.now() }, cst.STATIC_SECRET_TOKEN, { expiresIn: '1h' }, function (err, token) {
             res.status(200).json({ login: "success", username, token });
