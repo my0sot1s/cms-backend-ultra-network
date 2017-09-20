@@ -66,7 +66,7 @@ require("./controllers").default.map((value) => {
 // map api to deploy
 // ready on start
 require("./api").default.map((value) => {
-    app.use('/api', cors(corsMiddleware), value)
+    app.use('/api', cors(corsMiddleware), Object.values(value)[0])
 });
 // redirect to base.
 app.get("/", (req, res) => {

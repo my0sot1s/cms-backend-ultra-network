@@ -66,7 +66,7 @@ require("./controllers").default.map(function (value) {
 // map api to deploy
 // ready on start
 require("./api").default.map(function (value) {
-    app.use('/api', (0, _cors2.default)(_middlewares.corsMiddleware), value);
+    app.use('/api', (0, _cors2.default)(_middlewares.corsMiddleware), Object.values(value)[0]);
 });
 // redirect to base.
 app.get("/", function (req, res) {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<%-include("partials/head.ejs",{title:"APIs - Nói với em"})%>
+
+<body class="sidebar-mini fixed">
+  <div class="wrapper">
+  <%- include("partials/header.ejs")%>
+  <%- include("partials/nav.ejs",{name:'Danh sách APIs'})%>
+  
+    <div class="content-wrapper">
+       <%- include("partials/page-title.ejs",{title:'Danh sách APIs'})%>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+			 	<h3 class="card-title">Danh Sách các APIs</h3>
+				<table class="table table-bordered">
+					<thead>
+					<tr>
+						<th>#</th>
+						<th>API NAME</th>
+						<th>URI</th>
+						<th>METHOD</th>
+						<th>NOTE</th>
+					</tr>
+					</thead>
+					<tbody>
+					<% for(var i=0; i<lapi.length; i++) {%>
+						<tr>
+						<td><%= i+1%></td>
+						<td><%= lapi[i].name%></td>
+						<td><a href="<%= '/api/'+lapi[i].method.method%>" target="_blank"><%= lapi[i].method.method%></a></td>
+						<td><%= lapi[i].method.verb.toString().toUpperCase()%></td>
+						<td><%= lapi[i].method.verb.toString().toUpperCase()==="GET"?"GET METHOD ACCESS QUERY ?limit={limit}&page={page}":""%></td>
+							</tr>
+					<% } %>
+					</tbody>
+				</table>
+			</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ <%- include("partials/scripts.ejs")%>
+</body>
+
+</html>

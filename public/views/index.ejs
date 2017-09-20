@@ -8,22 +8,39 @@
   <%- include("partials/nav.ejs")%>
   
     <div class="content-wrapper">
-      <div class="page-title">
-        <div>
-          <h1><i class="fa fa-dashboard"></i> Home </h1>
-          <p>Start a beautiful journey here</p>
-        </div>
-        <div>
-          <ul class="breadcrumb">
-            <li><i class="fa fa-home fa-lg"></i></li>
-            <li><a href="#">Home Page</a></li>
-          </ul>
-        </div>
-      </div>
+  <%- include("partials/page-title.ejs",{title:'Home'})%>
       <div class="row">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-body">Load Your Data Here</div>
+            <div class="card-body">
+              <h2>Traffic</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                      <div class="widget-small primary coloured-icon"><i class="icon fa fa-sign-in fa-3x"></i>
+                        <div class="info">
+                          <h4>USER LOGIN</h4>
+                          <p><b>5</b></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="widget-small info coloured-icon"><i class="icon fa fa-tasks fa-3x"></i>
+                        <div class="info">
+                          <h4>API REQUEST</h4>
+                          <p><b>25</b></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="widget-small warning coloured-icon"><i class="icon fa fa-files-o fa-3x"></i>
+                        <div class="info">
+                          <h4>Uploades</h4>
+                          <p><b>10</b></p>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
