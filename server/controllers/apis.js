@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const cst = require("../utils/constants");
-router.get('/api-list', require("../utils/middlewares").authenMiddleware, (req, res) => {
+router.get('/api-list', require("../utils/middlewares").authenMiddleware, function (req, res) {
 	var apis = require("../api").default
 		, lapi = []
 		, keys = Object.keys(apis);
