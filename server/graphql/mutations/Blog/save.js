@@ -1,6 +1,6 @@
 import { GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql'
 import { BlogType, BlogInputType } from '../../types/Blog'
-import Blog from '../../../models/Blog'
+import Blog from '../../../models/mongo/Blog'
 // import { pubsub } from '../../schema'
 import { publishEvent } from '../../subscriptions'
 

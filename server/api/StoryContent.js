@@ -1,4 +1,4 @@
-import Model, { find } from '../models/StoryContent'
+import Model, { find } from '../models/mongo/StoryContent'
 const router = require("express").Router()
 
 

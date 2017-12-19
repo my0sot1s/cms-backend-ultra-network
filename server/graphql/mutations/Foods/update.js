@@ -5,7 +5,7 @@ import {
 } from 'graphql'
 // import { createTypeWithPagination } from 'graphql/utils'
 import { FoodsType, FoodsInputType } from '../../types/Foods'
-import Foods from '../../../models/Foods'
+import Foods from '../../../models/mongo/Foods'
 
 const mutation = {
   type: FoodsType,

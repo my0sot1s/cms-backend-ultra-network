@@ -5,7 +5,7 @@ import {
   GraphQLList
 } from 'graphql'
 import { BlogType } from '../../types/Blog'
-import Blog from '../../../models/Blog'
+import Blog from '../../../models/mongo/Blog'
 
 export default {
   type: new GraphQLList(BlogType),

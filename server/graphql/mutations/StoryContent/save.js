@@ -5,7 +5,7 @@ import {
 } from 'graphql'
 // import { createTypeWithPagination } from 'graphql/utils'
 import { StoryContentType, StoryContentInputType } from '../../types/StoryContent'
-import Content from '../../../models/StoryContent'
+import Content from '../../../models/mongo/StoryContent'
 
 const mutation = {
   type: StoryContentType,

@@ -1,4 +1,4 @@
-import Model, { register, login } from '../models/User'
+import Model, { register, login } from '../models/mongo/User'
 const router = require("express").Router()
 import jwt from 'jsonwebtoken';
 const cst = require("../utils/constants");

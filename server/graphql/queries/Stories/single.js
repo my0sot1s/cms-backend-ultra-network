@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { StoriesType } from '../../types/Stories'
-import Stories from '../../../models/Stories'
+import Stories from '../../../models/mongo/Stories'
 
 export default {
   type: StoriesType,

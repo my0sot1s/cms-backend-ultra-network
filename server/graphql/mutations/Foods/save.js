@@ -1,6 +1,6 @@
 import { GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql'
 import { FoodsType, FoodsInputType } from '../../types/Foods'
-import Foods from '../../../models/Foods'
+import Foods from '../../../models/mongo/Foods'
 // import { pubsub } from '../../schema'
 import { publishEvent } from '../../subscriptions'
 

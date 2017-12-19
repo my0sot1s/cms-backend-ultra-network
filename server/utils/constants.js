@@ -32,6 +32,22 @@ export const DB = {
         "name": "dbnode",
         "user": "dev",
         "connector": "mongodb"
+    },
+    "mysql": {
+        "host": "mysql8.db4free.net",//64.62.211.131
+        "port": 3306,
+        "url": "mysql://teng:95manhte@mysql8.db4free.net:3306/mynode",
+        "database": "mynode",
+        "password": "95manhte",
+        "user": "teng"
+    },
+    "mysql_localhost": {
+        "host": "localhost",
+        "port": 3306,
+        "url": "mysql://root:95manhte@localhost.net:3306/mynode",
+        "database": "mynode",
+        "password": "95manhte",
+        "user": "root"
     }
 }
 

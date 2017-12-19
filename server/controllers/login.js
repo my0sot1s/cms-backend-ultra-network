@@ -1,6 +1,6 @@
 import passport from 'passport'
 const router = require("express").Router();
-import * as User from "../models/User"
+import * as User from "../models/mongo/User"
 import jwt from 'jsonwebtoken';
 const cst = require("../utils/constants");
 

@@ -1,5 +1,5 @@
-import Comments, { find as findComments } from '../models/Comments'
-import Post, { find as findPost } from '../models/Post'
+import Comments, { find as findComments } from '../models/mongo/Comments'
+import Post, { find as findPost } from '../models/mongo/Post'
 const router = require("express").Router()
 
 router.get('/post/:postId?', function (req, res) {

@@ -4,7 +4,7 @@ import {
   GraphQLList
 } from 'graphql'
 import { BlogType, BlogInputType } from '../../types/Blog'
-import Blog from '../../../models/Blog'
+import Blog from '../../../models/mongo/Blog'
 import { publishEvent } from '../../subscriptions'
 
 export default {

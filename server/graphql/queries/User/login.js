@@ -6,7 +6,7 @@ import {
 } from 'graphql'
 import Promise from "bluebird"
 import { UserType } from '../../types/User'
-import User, { login } from '../../../models/User'
+import User, { login } from '../../../models/mongo/User'
 import jwt from 'jsonwebtoken';
 const cst = require("../../../utils/constants");
 export default {

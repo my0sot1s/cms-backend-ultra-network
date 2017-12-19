@@ -1,4 +1,4 @@
-import Model, { find } from '../models/Center'
+import Model, { find } from '../models/mongo/Center'
 const router = require("express").Router()
 //ex:http://localhost:3001/api/stories?limit=2&page=2
 

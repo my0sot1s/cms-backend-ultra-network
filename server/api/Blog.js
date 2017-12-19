@@ -1,4 +1,4 @@
-import Model, { find, save, findbyId } from '../models/Blog'
+import Model, { find, save, findbyId } from '../models/mongo/Blog'
 const router = require("express").Router()
 
 //ex:http://localhost:3001/api/stories?limit=2&page=2

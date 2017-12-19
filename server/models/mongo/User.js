@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
-import Promise from 'promise'
+import Promise from 'bluebird'
 
 //Create a schema for chat
 const Schema = mongoose.Schema({
@@ -37,7 +37,7 @@ const Model = mongoose.model('User', Schema, 'User');
  */
 const hash = (password, hashPass, salt) => {
     console.log(hashPass, salt)
-    return new Promise((resolve, reject) => {
+    return new Promise(function (resolve, reject) {
         crypto.pbkdf2(password, salt.toHexString(), 1000, 16, 'sha512', (err, derivedKey) => {
             if (err) reject(err)
             else {

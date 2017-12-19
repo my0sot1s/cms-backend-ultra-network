@@ -5,7 +5,7 @@ import {
 } from 'graphql'
 // import { createTypeWithPagination } from 'graphql/utils'
 import { StoriesType, StoriesInputType } from '../../types/Stories'
-import Stories from '../../../models/Stories'
+import Stories from '../../../models/mongo/Stories'
 
 const mutation = {
   type: StoriesType,

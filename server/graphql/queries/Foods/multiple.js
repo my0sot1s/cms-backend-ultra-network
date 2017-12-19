@@ -6,7 +6,7 @@ import {
   GraphQLList
 } from 'graphql'
 import { FoodsType } from '../../types/Foods'
-import Foods from '../../../models/Foods'
+import Foods from '../../../models/mongo/Foods'
 
 export default {
   type: new GraphQLList(FoodsType),

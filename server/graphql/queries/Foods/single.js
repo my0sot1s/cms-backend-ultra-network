@@ -4,7 +4,7 @@ import {
 } from 'graphql'
 
 import { FoodsType } from '../../types/Foods'
-import Foods from '../../../models/Foods'
+import Foods from '../../../models/mongo/Foods'
 
 export default {
   type: FoodsType,

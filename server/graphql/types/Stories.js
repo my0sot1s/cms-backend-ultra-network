@@ -8,7 +8,7 @@ import {
   GraphQLList
 } from 'graphql'
 import { StoryContentType } from './StoryContent'
-import StoryContent from '../../models/StoryContent'
+import StoryContent from '../../models/mongo/StoryContent'
 
 export const StoriesType = new GraphQLObjectType({
   name: 'Stories',

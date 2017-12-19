@@ -1,7 +1,7 @@
 import passport from 'passport';
 let LocalStrategy = require('passport-local').Strategy;
 
-import * as _ from '../models/User'
+import * as _ from '../models/mongo/User'
 
 
 
